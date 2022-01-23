@@ -42,6 +42,16 @@ export default function Register() {
                                
                             />
                         </div>
+
+                        <div className="mb-10 px-4">
+                            <InputIcon
+                                type="text"
+                                color="lightBlue"
+                                placeholder="Username"
+                                iconName="account_circle"
+                               
+                            />
+                        </div>
                         <div className="mb-10 px-4">
                             <InputIcon
                                 type="email"
