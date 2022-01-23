@@ -4,6 +4,7 @@ import Header from 'components/landing/Header';
 import WorkingSection from 'components/landing/WorkingSection';
 import TeamSection from 'components/landing/TeamSection';
 import ContactSection from 'components/landing/ContactSection';
+import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 
 export default function Landing() {
     return (
@@ -16,6 +17,7 @@ export default function Landing() {
                 <WorkingSection />
                 <TeamSection />
                 <ContactSection />
+                <CreateCommunityForm />
             </main>
             <DefaultFooter />
         </>
