@@ -13,6 +13,7 @@ import axios from 'axios';
 
 
 
+
 export default function CreateCommunityForm() {
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
@@ -123,8 +124,7 @@ export default function CreateCommunityForm() {
                                     Create My Community
                                 </Button>
                             </div>
-
-                        </form >
+                            </form >
                     </div>
                 </div>
             </div>
