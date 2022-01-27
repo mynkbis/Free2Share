@@ -25,7 +25,7 @@ export default function DefaultNavbar() {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <NavbarBrand>Material Tailwind</NavbarBrand>
+                        <NavbarBrand>Free 2 Share</NavbarBrand>
                     </a>
                     <NavbarToggler
                         onClick={() => setOpenNavbar(!openNavbar)}
