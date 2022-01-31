@@ -5,6 +5,11 @@ import WorkingSection from 'components/landing/WorkingSection';
 import TeamSection from 'components/landing/TeamSection';
 import ContactSection from 'components/landing/ContactSection';
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
+import CreateNewPost from 'components/Community/CreateNewPost';
+import PostPage from 'components/Community/PostPage';
+import CommunityDashboard from 'components/Community/CommunityDashboard';
+import Content from 'components/profile/Content';
+import UserDashboard from 'components/User/UserDashboard';
 
 export default function Landing() {
     return (
@@ -14,10 +19,15 @@ export default function Landing() {
             </div>
             <main>
                 <Header />
-                <WorkingSection />
+                {/* <WorkingSection />
                 <TeamSection />
                 <ContactSection />
-                <CreateCommunityForm />
+                <CreateCommunityForm /> */}
+                {/* <Content /> */}
+                {/* <CommunityDashboard /> */}
+                {/* <CreateNewPost /> */}
+                {/* <PostPage /> */}
+                < UserDashboard/>
             </main>
             <DefaultFooter />
         </>

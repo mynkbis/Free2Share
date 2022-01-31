@@ -17,6 +17,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import CommunityTestimonial from './CommunityTestimonial';
 import { useState } from 'react'
 import Input from '@material-tailwind/react/Input';
+import PostPage from './PostPage';
 
 import Stack from '@mui/material/Stack';
 import Textarea from "@material-tailwind/react/Textarea";
@@ -25,35 +26,36 @@ const InputFile = styled('input')({
     display: 'none',
 });
 
-export default function CommunityDashboard() {
+export default function CommunityDashboard(props) {
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [memberList, setMemberList] = useState([])
+
+    
     return (
         <>
-            <section className="relative py-16 bg-gray-100">
-                <div className="container max-w-7xl px-4 mx-auto">
-                    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-2xl -mt-64">
-                        <div className="px-6">
-                            <div className="flex flex-wrap justify-center">
-                                <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                                    <div className="relative">
-                                        <div className="w-40 -mt-20">
-                                            <Image
-                                                src={ProfilePicture}
-                                                alt="Profile picture"
-                                                raised
-                                                rounded
-                                            />
-                                        </div>
+           <section className="relative py-16 bg-gray-100">
+            <div className="container max-w-7xl px-4 mx-auto">
+                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-2xl -mt-64">
+                    <div className="px-6">
+                        <div className="flex flex-wrap justify-center">
+                            <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                                <div className="relative">
+                                    <div className="w-40 -mt-20">
+                                    <Image
+                                            src={ProfilePicture}
+                                            alt="Profile picture"
+                                            raised
+                                            rounded
+                                        />
                                     </div>
                                 </div>
-                                <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                                              
-                                            
-                                       <Button color="lightBlue" ripple="light" >
-                                        Add Members
-                                    </Button>
+                            </div>
+                            <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
+                                <Button color="lightBlue" ripple="light">
+                                    Conntect
+                                </Button>
+                         
                                     &nbsp;&nbsp;&nbsp;
                                     <Button color="lightBlue" ripple="light"> 
                                         Add Post
@@ -127,17 +129,21 @@ export default function CommunityDashboard() {
                                         <div>- Member name</div>
                                         Description of the product being offered to be lent by the member
                                         <div>  Status - Open / close </div>
+                                        {/* <PostPage /> */}
                                     </PostCard>
+                                  
                                     <PostCard
                                         color="lightBlue"
                                         icon="back_hand"
-                                        title="Wanted a Cat "
+                                        title="Wanted a Cat"
                                     >
                                         <div>- Member name</div>
 
                                         Description of the product wanted by the member
                                         <div>  Status - Open / close </div>
+                                        {/* <PostPage /> */}
                                     </PostCard>
+                                  
                                     <PostCard
                                         color="teal"
                                         icon="volunteer_activism"
@@ -146,7 +152,9 @@ export default function CommunityDashboard() {
                                         <div>- Member name</div>
                                         Description of the product given away by the member
                                         <div>  Status - Open / close </div>
+                                        {/* <PostPage /> */}
                                     </PostCard>
+                                   
                                 </div>
 
                                 {/* PhotoGallery Code starts here */}

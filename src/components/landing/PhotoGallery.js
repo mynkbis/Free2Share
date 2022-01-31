@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import PostPage from 'components/Community/PostPage';
 
 export default function PhotoGallery() {
   return (
@@ -18,6 +19,7 @@ export default function PhotoGallery() {
             />
             <ImageListItemBar position="below" title={item.author} />
           </ImageListItem>
+         
         ))}
       </ImageList>
     </Box>

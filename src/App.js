@@ -9,7 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
-
+import "@material-tailwind/react/tailwind.css";
 function App() {
     return (
         <Switch>
