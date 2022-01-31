@@ -6,7 +6,6 @@ import Icon from '@material-tailwind/react/Icon';
 
 export default function LandingTeamCard({ img, name, position }) {
     return (
-        
         <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
             <div className="px-6">
                 <Image src={img} alt={name} raised />
