@@ -13,7 +13,6 @@ import Container from 'components/login/Container';
 import Alert from "@material-tailwind/react/Alert";
 
 
-
 export default function Register() {
 
     const Submit=()=>{

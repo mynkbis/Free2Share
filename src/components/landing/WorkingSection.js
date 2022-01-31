@@ -11,7 +11,6 @@ import Teamwork from 'assets/img/teamwork.jpeg';
 
 export default function WorkingSection() {
     return (
-        
         <section className="pb-20 bg-gray-100 -mt-32">
             <div className="container max-w-7xl mx-auto px-4">
                 <div className="flex flex-wrap relative z-50">

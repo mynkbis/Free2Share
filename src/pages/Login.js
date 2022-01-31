@@ -12,7 +12,6 @@ import Page from 'components/login/Page';
 import Container from 'components/login/Container';
 import Label from "@material-tailwind/react/Label";
 
-
 export default function Login() {
     return (
         <Page>

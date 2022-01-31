@@ -7,12 +7,9 @@ import PostSection from 'components/PostSection';
 import AboutSection from 'components/AboutSection';
 
 function Home() {
-  
   return <div>
       <DefaultNavbar/>
-
       <QuoteCard />
-      
       <PostSection />
       <AboutSection />
 
