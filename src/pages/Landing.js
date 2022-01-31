@@ -8,6 +8,7 @@ import ContactSection from 'components/landing/ContactSection';
 export default function Landing() {
     return (
         <>
+        
             <div className="absolute w-full z-20">
                 <DefaultNavbar />
             </div>

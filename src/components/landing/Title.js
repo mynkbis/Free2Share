@@ -9,5 +9,6 @@ export default function Title({ heading, children }) {
                 <LeadText color="blueGray">{children}</LeadText>
             </div>
         </div>
+        
     );
 }

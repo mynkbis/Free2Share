@@ -10,6 +10,6 @@ export default function ContactCard({ icon, title, children }) {
             </div>
             <H6 color="gray">{title}</H6>
             <Paragraph color="blueGray">{children}</Paragraph>
-        </div>
+        </div> 
     );
 }

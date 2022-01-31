@@ -10,7 +10,7 @@ export default function ContactSection() {
                     Put the potentially record low maximum sea ice extent tihs
                     year down to low ice. According to the National Oceanic and
                     Atmospheric Administration, Ted, Scambos.
-                </Title>
+                </Title> 
 
                 <div className="flex flex-wrap -mt-12 justify-center">
                     <ContactCard icon="stars" title="Excelent Services">

@@ -10,6 +10,7 @@ export default function Profile() {
                 <DefaultNavbar />
             </div>
             <main>
+                
                 <Header />
                 <Content />
             </main>

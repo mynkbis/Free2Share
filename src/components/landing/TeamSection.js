@@ -7,6 +7,7 @@ import Image4 from 'assets/img/team-4-470x470.png';
 
 export default function TeamSection() {
     return (
+        
         <section className="pt-20 pb-48">
             <div className="container max-w-7xl mx-auto px-4">
                 <Title heading="Here are our heroes">
