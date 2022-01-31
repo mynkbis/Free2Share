@@ -28,7 +28,7 @@ const colors = {
 
 export default function StatusCard({ title, children }) {
     return (
-        <div className="w-full md:w-6/12 p-4 flex justify-center text-center mt-25px mb-25px mx-auto">
+        <div className="w-full md:w-6/12 p-8 flex justify-center text-center mt-25px mb-25px mx-auto">
             <Card>
                 <CardBody>
                     

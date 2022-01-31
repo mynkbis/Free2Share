@@ -17,7 +17,7 @@ export default function DefaultNavbar() {
     const [openNavbar, setOpenNavbar] = useState(false);
 
     return (
-        <Navbar color="transparent" navbar>
+        <Navbar color="blue" navbar>
             <NavbarContainer>
                 <NavbarWrapper>
                     <a
@@ -56,7 +56,7 @@ export default function DefaultNavbar() {
                             </NavLink>
                             <div className="text-white">
                                 <Dropdown
-                                    color="transparent"
+                                    color="white"
                                     size="sm"
                                     buttonType="link"
                                     buttonText={
@@ -123,7 +123,7 @@ export default function DefaultNavbar() {
                             >
                                 <Button
                                     color="transparent"
-                                    className="bg-white text-black ml-4"
+                                    className="bg-red text-white ml-4"
                                     ripple="dark"
                                 >
                                     Free Download
