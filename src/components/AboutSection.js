@@ -7,6 +7,7 @@ import Paragraph from '@material-tailwind/react/Paragraph';
 function AboutSection() {
   return <div>
 
+
       <div className='flex' style={{"padding":" 100px 0px"}}>
 
           <div className='md:w-6/12' style={{"margin-right":"50px"}}> 

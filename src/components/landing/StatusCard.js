@@ -5,6 +5,7 @@ import H6 from '@material-tailwind/react/Heading6';
 import Paragraph from '@material-tailwind/react/Paragraph';
 
 const colors = {
+    
     blueGray: 'bg-blue-gray-500',
     gray: 'bg-gray-500',
     brown: 'bg-brown-500',

@@ -5,10 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+<<<<<<< HEAD
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
+=======
+    <React.StrictMode>
+        <BrowserRouter>
+        
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
+>>>>>>> himanshu
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -7,7 +7,6 @@ function PostSection() {
       <PostCard />
       <PostCard />
       <PostCard />
-
       </div>
       
   </div>;
