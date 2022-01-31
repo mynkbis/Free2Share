@@ -1,16 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import App from 'App';
+import reportWebVitals from 'reportWebVitals';
 
 ReactDOM.render(
-<<<<<<< HEAD
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-=======
     <React.StrictMode>
         <BrowserRouter>
         
@@ -18,7 +12,6 @@ ReactDOM.render(
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
->>>>>>> himanshu
 );
 
 // If you want to start measuring performance in your app, pass a function
