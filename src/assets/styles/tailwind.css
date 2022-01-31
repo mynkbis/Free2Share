@@ -812,6 +812,9 @@ video {
 .bg-center{
 	background-position: center;
 }
+.object-cover{
+	object-fit: cover;
+}
 .p-3{
 	padding: 0.75rem;
 }
@@ -2515,11 +2518,11 @@ video {
 	.md\:mb-0{
 		margin-bottom: 0px;
 	}
-	.md\:w-4\/12{
-		width: 33.333333%;
-	}
 	.md\:w-6\/12{
 		width: 50%;
+	}
+	.md\:w-4\/12{
+		width: 33.333333%;
 	}
 	.md\:w-5\/12{
 		width: 41.666667%;

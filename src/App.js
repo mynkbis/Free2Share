@@ -8,8 +8,7 @@ import Register from 'pages/Register';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Tailwind CSS Style Sheet
-import 'assets/styles/tailwind.css'; 
-
+import 'assets/styles/tailwind.css';
 import Home from 'pages/Home';
 
 function App() {

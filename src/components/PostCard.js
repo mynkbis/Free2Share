@@ -7,7 +7,6 @@ import Img from './images/test.jpg'
 import { CardImage } from '@material-tailwind/react';
 
 const colors = {
-    
     blueGray: 'bg-blue-gray-500',
     gray: 'bg-gray-500',
     brown: 'bg-brown-500',
