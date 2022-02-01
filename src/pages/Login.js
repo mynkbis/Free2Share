@@ -4,20 +4,58 @@ import CardBody from '@material-tailwind/react/CardBody';
 import CardFooter from '@material-tailwind/react/CardFooter';
 import H5 from '@material-tailwind/react/Heading5';
 import InputIcon from '@material-tailwind/react/InputIcon';
-import Checkbox from '@material-tailwind/react/Checkbox';
 import Button from '@material-tailwind/react/Button';
 import DefaultNavbar from 'components/DefaultNavbar';
 import SimpleFooter from 'components/SimpleFooter';
 import Page from 'components/login/Page';
 import Container from 'components/login/Container';
 import Label from "@material-tailwind/react/Label";
+import { useState } from 'react';
+import "./Register.css"
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios"
+import ForgetPassword from './forgetPassword';
 
-export default function Login() {
+export default function Login(props) {
+    const History=useHistory();
+const [error, setError]=useState(null);
+const [loading, setLoading]=useState(false);
+
+const [value, SetValue]=useState({
+    username:"",
+    password:""
+});
+const handleChange = (e) =>{
+    SetValue({
+        ...value ,
+        [e.target.name]:e.target.value
+      })
+}
+
+const handleLogin=()=>{
+setError(null);
+setLoading(true);
+// console.log(value.username,value.password);
+axios.post("https://soal-capstone-project.herokuapp.com/signin",{
+    username: value.username,
+    password: value.password
+}).then(function (response) {
+    console.log(response);
+    setLoading(false);
+    alert('signin Successfully');
+    History.push("/profile");      // need to update on later stage once user dashboard is ready
+  })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+ }
+
     return (
         <Page>
             <DefaultNavbar />
             <Container>
-                <Card>
+                <Card className="loginCard">
                     <CardHeader color="lightBlue">
                         <H5 color="white" style={{ marginBottom: 0 }}>
                             Login
@@ -31,7 +69,9 @@ export default function Login() {
                                 color="lightBlue"
                                 placeholder="Email Address"
                                 iconName="email"
-                                required
+                                name="username"
+                                defaultValue={value.username}
+                                onChange={handleChange}
                                 
                             />
                         </div>
@@ -41,11 +81,19 @@ export default function Login() {
                                 color="lightBlue"
                                 placeholder="Password"
                                 iconName="lock"
+                                name="password"
+                                defaultValue={value.password}
+                                onChange={handleChange}
                             />
+                            {error && <p className='error_login'>{error}</p>}
                         </div>
-                        <div className="mb-4 px-4">
-                        <Label color="lightBlue">Forget password</Label>
-                        </div>
+                        <div className="mb--4 px-4">
+                       <a href='./ForgetPassword'> <Label color="lightBlue">Forget password</Label></a> 
+                       {/* <Link to ={'./forgetPassword.js'}>Forget Password</Link> */}
+                       </div>
+                       <div class="Forget_already">
+                       <a href='./Register'>Create an Account !</a>
+                                               </div>
                     </CardBody>
                     <CardFooter>
                         <div className="flex justify-center bg-bb">
@@ -54,8 +102,9 @@ export default function Login() {
                                 buttonType="link"
                                 size="lg"
                                 ripple="dark"
-                            >
-                                Get Started
+                                value={loading ? "Loading...":"Login"}
+                           onClick={handleLogin}
+                            >  Login
                             </Button>
                         </div>
                     </CardFooter>
