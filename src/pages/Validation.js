@@ -5,13 +5,11 @@ const Validation = (values) => {
 
   if(!values.name){
       errors.name="Name is required" 
-  
-    }
+      }
 
     if(!values.mobile){
         errors.mobile="Mobile is required" 
-    
-      }
+          }
 
     if(!values.username){
         errors.username="Email is required"
@@ -21,8 +19,8 @@ const Validation = (values) => {
     if(!values.password){
         errors.password="Password is mandatory"
     }
-    else if(values.password.length<2){
-        errors.password="Password must have atleast 2 Characters"
+    else if(values.password.length<8){
+        errors.password="Password must have atleast 8 Characters"
     }
      if(values.cPassword!==values.password){
         errors.cPassword="Password didn't matched"
@@ -32,9 +30,7 @@ const Validation = (values) => {
     if(!values.check){
         errors.check="Accept the T&C"
     }
-
- 
-    return errors
+     return errors
 };
 
 export default Validation;

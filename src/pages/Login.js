@@ -20,6 +20,7 @@ export default function Login(props) {
     const History=useHistory();
 const [error, setError]=useState(null);
 const [loading, setLoading]=useState(false);
+const[userData,setUserData]=useState("");
 
 const [value, SetValue]=useState({
     username:"",
@@ -43,8 +44,11 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
     console.log(response);
     setLoading(false);
     alert('signin Successfully');
+    setUserData(response.data)
+    localStorage.setItem("userData",response.data.accessToken)
     History.push("/profile");      // need to update on later stage once user dashboard is ready
-  })
+  console.log("I am access token>>>>>", userData)
+})
     .catch(function (error) {
       console.log(error);
     });

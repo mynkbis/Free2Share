@@ -36,7 +36,7 @@ export default function DefaultNavbar() {
                 <NavbarCollapse open={openNavbar}>
                     <Nav>
                         <div className="flex flex-col z-50 lg:flex-row lg:items-center">
-                            <NavLink
+                            {/* <NavLink
                                 href="https://material-tailwind.com/documentation/quick-start?ref=mtk"
                                 target="_blank"
                                 rel="noreferrer"
@@ -44,7 +44,7 @@ export default function DefaultNavbar() {
                             >
                                 <Icon name="description" size="2xl" />
                                 &nbsp;Docs
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink
                                 href="https://material-tailwind.com/components?ref=mtk"
                                 target="_blank"
@@ -52,7 +52,7 @@ export default function DefaultNavbar() {
                                 ripple="light"
                             >
                                 <Icon name="apps" size="2xl" />
-                                &nbsp;Components
+                                &nbsp;Gallery
                             </NavLink>
                             <div className="text-white">
                                 <Dropdown
