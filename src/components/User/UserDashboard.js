@@ -14,39 +14,44 @@ import PostCard from 'components/landing/PostCard'
 import PhotoGallery from 'components/landing/PhotoGallery'
 import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { useState , useEffect} from 'react'
-import axios from 'axios'
+import { useState , useEffect, useDispatch} from 'react'
+import axios from 'axios';
 import CommunityListModal from './CommunityListModal';
 import FadeLoader from "react-spinners/FadeLoader";
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
+import {connect} from 'react-redux';
+// import { fetchCommunities } from '../../redux/community/actions/communityActions';
+
+
 
 const InputFile = styled('input')({
     display: 'none',
 });
 
-export default function UserDashboard() {
+function UserDashboard() {
+    // const dispatch = useDispatch();
     const [communityList,setCommunityList]=useState([])
     const [userDetails,setUserDetails]=useState({})
-    let [loading, setLoading] = useState(true);
    
-    // fetching the community details of the user
-    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-            "userID" : "61ec7ae59877e6be51d1cf63"
-        })
-        .then(res => {setCommunityList(communityList => [...communityList, res])
-            console.log(communityList) })
-        .catch(function (error) {
-            console.log(error.toJSON());
-          })
-       ,[])
-        console.log(communityList) 
+    // fetching the community details of the user from store
+    console.log("hello" )   
 
+ useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
+    "userID" : "61ec7ae59877e6be51d1cf63"
+})
+.then(res => setCommunityList(communityList => [...communityList, res]))
+.catch(function (error) {
+    console.log(error.toJSON());
+  })
+,[]) 
+    // console.log(communityList);  
+      
         
 // fetching the user details from user table
 // useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
 //     "userID" : "61ec7ae59877e6be51d1cf63"
 // })
-// .then(res => {setUserDetails(res.data)
+// .then(res => {setUserDetails(res.data) 
 //     console.log(userDetails);})  
 // .catch(function (error) {
 //     console.log(error.toJSON());
@@ -60,8 +65,9 @@ const override = css`
 `;
 // let list =[]
     return (
-        
         <>
+   
+        
      
             <section className="relative py-16 bg-gray-100">
                 <div className="container max-w-7xl px-4 mx-auto">
@@ -71,7 +77,7 @@ const override = css`
                                
 
                                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                                    <Button color="lightBlue" ripple="light">
+                                    <Button color="lightBlue" ripple="light" >
                                         Create New Community
                                     </Button>
 
@@ -202,4 +208,8 @@ const override = css`
 
         </>
     );
-}
+ 
+                                            }
+     
+
+  export default UserDashboard 

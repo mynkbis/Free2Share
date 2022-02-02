@@ -13,6 +13,7 @@ import UserDashboard from 'components/User/UserDashboard';
 
 export default function Landing() {
     return (
+     
         <>
             <div className="absolute w-full z-20">
                 <DefaultNavbar />
@@ -25,9 +26,9 @@ export default function Landing() {
                 <CreateCommunityForm /> */}
                 {/* <Content /> */}
                 {/* <CommunityDashboard /> */}
-                <CreateNewPost />
+                {/* <CreateNewPost /> */}
                 {/* <PostPage /> */}
-                {/* < UserDashboard/> */}
+                < UserDashboard />
             </main>
             <DefaultFooter />
         </>

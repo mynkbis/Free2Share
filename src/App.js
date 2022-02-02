@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 import Landing from 'pages/Landing';
 import Profile from 'pages/Profile';
 import Login from 'pages/Login';
@@ -14,12 +14,9 @@ import 'assets/styles/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
 
 function App() {
-    toast.configure()
-    const notify = ()=>{
-        // // Set to 3sec
-        toast.success('successful!', {position:toast. TOP_CENTER, autoClose:3000})
-         }
+   
     return (
+
         <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/profile" component={Profile} />
@@ -27,6 +24,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Redirect from="*" to="/" />
         </Switch>
+        // </BrowserRouter>
     );
 }
 
