@@ -31,7 +31,7 @@ export default function CreateCommunityForm() {
     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
         communityName: communityName,
         communityDescription: communityDesc,
-      createdByID: '61ec7ae59877e6be51d1cf63'
+        createdByID: '61ec7ae59877e6be51d1cf63'
     }).then(function (response) {
       console.log(response);
     })

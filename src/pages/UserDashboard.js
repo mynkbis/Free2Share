@@ -1,7 +1,7 @@
 import DefaultNavbar from 'components/DefaultNavbar';
 import DefaultFooter from 'components/DefaultFooter';
 import Header from 'components/landing/Header';
-import UserDashboard from 'components/User/UserDashboard';
+import Dashboard from 'components/user/Dashboard';
 
 export default function UserDashboard() {
     return (
@@ -11,7 +11,7 @@ export default function UserDashboard() {
             </div>
             <main>
                 <Header />
-                < UserDashboard/>
+                <Dashboard />
             </main>
             <DefaultFooter />
         </>
