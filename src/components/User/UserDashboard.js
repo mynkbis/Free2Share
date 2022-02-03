@@ -57,7 +57,21 @@ function UserDashboard() {
 //     console.log(error.toJSON());
 //   })
 // ,[]) 
-//     console.log(userDetails);      
+//     console.log(userDetails);   
+
+
+//fetching Posts from Post Table
+useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
+    "userID" : "61ec7ae59877e6be51d1cf63"
+})
+.then(res => {setPostDetails(postDetails => [...postDetails, res.data])
+    console.log(postDetails[0]);
+})  
+.catch(function (error) {
+    console.log(error.toJSON());
+  })
+,[]) 
+   
 const override = css`
   display: block;
   margin: 0 auto;
@@ -66,9 +80,7 @@ const override = css`
 // let list =[]
     return (
         <>
-   
-        
-     
+  
             <section className="relative py-16 bg-gray-100">
                 <div className="container max-w-7xl px-4 mx-auto">
                     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-2xl -mt-64">
@@ -161,37 +173,16 @@ const override = css`
                                             <H5 color="gray">Posted by User</H5>
                                         </div></div>
                                 </div></div>
-                            <div className="flex flex-wrap relative z-50">
-                                <PostCard color="red" icon="cloud_upload" title="Lending Books">
-                                    <div>- Member name</div>
-                                    Description of the product being offered to be lent by the member
-                                    <div>  Status - Open / close </div>
-                                    {/* <PostPage /> */}
-                                </PostCard>
+                                <div className="flex flex-wrap">
 
-                                <PostCard
-                                    color="lightBlue"
-                                    icon="back_hand"
-                                    title="Wanted a Cat"
-                                >
-                                    <div>- Member name</div>
+{postDetails[0].data.length>0?postDetails[0].data.map((item,index) => {
+                                    return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />
+                                }):<FadeLoader/>}
+                                {/* // :<p>no posts</p>} */}
+                                
+                               </div>
 
-                                    Description of the product wanted by the member
-                                    <div>  Status - Open / close </div>
-                                    {/* <PostPage /> */}
-                                </PostCard>
-
-                                <PostCard
-                                    color="teal"
-                                    icon="volunteer_activism"
-                                    title="Giving Away Photo Frames"
-                                >
-                                    <div>- Member name</div>
-                                    Description of the product given away by the member
-                                    <div>  Status - Open / close </div>
-                                    {/* <PostPage /> */}
-                                </PostCard>
-                            </div>
+                            
 
                             {/* PhotoGallery Code starts here */}
                             <div className="text-center my-8">
@@ -211,5 +202,13 @@ const override = css`
  
                                             }
      
-
-  export default UserDashboard 
+                                            const mapStatetoProps = state => {
+                                                {
+                                                const {communityData} = state
+                                                console.log({communityData})
+                                                return{
+                                                communityData
+                                                }
+                                                }
+                                                }
+  export default UserDashboard
