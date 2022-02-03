@@ -43,7 +43,7 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
     console.log(response);
     setLoading(false);
     alert('signin Successfully');
-    History.push("/profile");      // need to update on later stage once user dashboard is ready
+    History.push("/user");      // need to update on later stage once user dashboard is ready
   })
     .catch(function (error) {
       console.log(error);
