@@ -841,13 +841,13 @@ video {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 }
-.py-16{
-	padding-top: 4rem;
-	padding-bottom: 4rem;
-}
 .px-6{
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
+}
+.py-16{
+	padding-top: 4rem;
+	padding-bottom: 4rem;
 }
 .py-4{
 	padding-top: 1rem;
@@ -2537,6 +2537,9 @@ video {
 	.md\:w-4\/12{
 		width: 33.333333%;
 	}
+	.md\:w-3\/12{
+		width: 25%;
+	}
 	.md\:w-6\/12{
 		width: 50%;
 	}
@@ -2560,14 +2563,14 @@ video {
 	.lg\:order-1{
 		order: 1;
 	}
+	.lg\:mb-0{
+		margin-bottom: 0px;
+	}
 	.lg\:mt-0{
 		margin-top: 0px;
 	}
 	.lg\:mr-4{
 		margin-right: 1rem;
-	}
-	.lg\:mb-0{
-		margin-bottom: 0px;
 	}
 	.lg\:w-6\/12{
 		width: 50%;

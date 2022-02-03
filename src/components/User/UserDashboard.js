@@ -14,12 +14,13 @@ import PostCard from 'components/landing/PostCard'
 import PhotoGallery from 'components/landing/PhotoGallery'
 import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { useState , useEffect, useDispatch} from 'react'
+import { useState, useEffect, useDispatch } from 'react'
 import axios from 'axios';
 import CommunityListModal from './CommunityListModal';
 import FadeLoader from "react-spinners/FadeLoader";
 import { css } from '@emotion/react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import PostSectionCard from '../../components/PostSectionCard'
 // import { fetchCommunities } from '../../redux/community/actions/communityActions';
 
 
@@ -30,63 +31,64 @@ const InputFile = styled('input')({
 
 function UserDashboard() {
     // const dispatch = useDispatch();
-    const [communityList,setCommunityList]=useState([])
-    const [userDetails,setUserDetails]=useState({})
-   
+    const [communityList, setCommunityList] = useState([])
+    const [userDetails, setUserDetails] = useState({})
+    const [postDetails, setPostDetails] = useState([])
+
     // fetching the community details of the user from store
-    console.log("hello" )   
 
- useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-    "userID" : "61ec7ae59877e6be51d1cf63"
-})
-.then(res => setCommunityList(communityList => [...communityList, res]))
-.catch(function (error) {
-    console.log(error.toJSON());
-  })
-,[]) 
+    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
+        "userID": "61ec7ae59877e6be51d1cf63"
+    })
+        .then(res => setCommunityList(communityList => [...communityList, res]))
+        .catch(function (error) {
+            console.log(error.toJSON());
+        })
+        , [])
     // console.log(communityList);  
-      
-        
-// fetching the user details from user table
-// useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
-//     "userID" : "61ec7ae59877e6be51d1cf63"
-// })
-// .then(res => {setUserDetails(res.data) 
-//     console.log(userDetails);})  
-// .catch(function (error) {
-//     console.log(error.toJSON());
-//   })
-// ,[]) 
-//     console.log(userDetails);   
 
 
-//fetching Posts from Post Table
-useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
-    "userID" : "61ec7ae59877e6be51d1cf63"
-})
-.then(res => {setPostDetails(postDetails => [...postDetails, res.data])
-    console.log(postDetails[0]);
-})  
-.catch(function (error) {
-    console.log(error.toJSON());
-  })
-,[]) 
-   
-const override = css`
+    // fetching the user details from user table
+    // useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
+    //     "userID" : "61ec7ae59877e6be51d1cf63"
+    // })
+    // .then(res => {setUserDetails(res.data) 
+    //     console.log(userDetails);})  
+    // .catch(function (error) {
+    //     console.log(error.toJSON());
+    //   })
+    // ,[]) 
+    //     console.log(userDetails);   
+
+
+    //fetching Posts from Post Table
+    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
+        "userID": "61ec7ae59877e6be51d1cf63"
+    })
+        .then(res => {
+            setPostDetails(postDetails => [...postDetails, res.data])
+            console.log(postDetails);
+        })
+        .catch(function (error) {
+            console.log(error.toJSON());
+        })
+        , [])
+
+    const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
-// let list =[]
+  
     return (
         <>
-  
+
             <section className="relative py-16 bg-gray-100">
                 <div className="container max-w-7xl px-4 mx-auto">
                     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-2xl -mt-64">
                         <div className="px-6">
                             <div className="flex flex-wrap justify-center">
-                               
+
 
                                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
                                     <Button color="lightBlue" ripple="light" >
@@ -95,58 +97,58 @@ const override = css`
 
                                     &nbsp;&nbsp;&nbsp;
                                     {/* <Button color="lightBlue" ripple="light"> */}
-                                        <CommunityListModal list = {communityList[0]?.data} />
+                                    <CommunityListModal list={communityList[0]?.data} />
                                     {/* // </Button> */}
                                     &nbsp;&nbsp;&nbsp;
                                     <Button color="lightBlue" ripple="light">
-                                                Edit Profile
-                                            </Button>
+                                        Edit Profile
+                                    </Button>
                                 </div>
                                 <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                     <div className="relative">
                                         <div className="w-40 -mt-20">
-                                             <Image
-                                             style={{
-                                                 borderRadius:"50%",
-                                                 width: '300px',
-                                                 height: '300px',
-                                                 objectFit: 'cover'
-                                             }}
-                                         src={ProfilePicture}
+                                            <Image
+                                                style={{
+                                                    borderRadius: "50%",
+                                                    width: '300px',
+                                                    height: '300px',
+                                                    objectFit: 'cover'
+                                                }}
+                                                src={ProfilePicture}
                                             //  src={communityList[0]? communityList[0].data[0].community_image.url: <FadeLoader />}
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                        
-                                            <div className="mr-4 p-3 text-center">
-                                            <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                               {communityList[0]?communityList[0].data.length:<FadeLoader /> }
-                                            </span>
-                                            <span className="text-sm text-gray-700">
-                                                Communities
-                                            </span>
-                                        </div>
 
-                                        <div className="mr-4 p-3 text-center">
-                                            <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                                10
-                                            </span>
-                                            <span className="text-sm text-gray-700">
-                                                Photos
-                                            </span>
-                                        </div>
-                                       
-                                        <div className="lg:mr-4 p-3 text-center">
-                                            <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                                8
-                                            </span>
-                                            <span className="text-sm text-gray-700">
-                                                Posts
-                                            </span>
-                                        </div>
-                                  </div>
+                                    <div className="mr-4 p-3 text-center">
+                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
+                                            {communityList[0] ? communityList[0].data.length : <FadeLoader />}
+                                        </span>
+                                        <span className="text-sm text-gray-700">
+                                            Communities
+                                        </span>
+                                    </div>
+
+                                    <div className="mr-4 p-3 text-center">
+                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
+                                            10
+                                        </span>
+                                        <span className="text-sm text-gray-700">
+                                            Photos
+                                        </span>
+                                    </div>
+
+                                    <div className="lg:mr-4 p-3 text-center">
+                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
+                                            8
+                                        </span>
+                                        <span className="text-sm text-gray-700">
+                                            Posts
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="text-center my-8">
@@ -170,19 +172,21 @@ const override = css`
                                             Gyaan about User
                                         </LeadText>
                                         <div className="text-center my-8">
+
+                                            {/* //The Posts Secion starts here */}
                                             <H5 color="gray">Posted by User</H5>
                                         </div></div>
                                 </div></div>
-                                <div className="flex flex-wrap">
+                            <div className="flex flex-wrap">
 
-{postDetails[0].data.length>0?postDetails[0].data.map((item,index) => {
+                                {postDetails[0]? postDetails[0].map((item, index) => {
                                     return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />
-                                }):<FadeLoader/>}
-                                {/* // :<p>no posts</p>} */}
-                                
-                               </div>
+                                }) :<FadeLoader />}
+                             
+ 
+                            </div>
 
-                            
+
 
                             {/* PhotoGallery Code starts here */}
                             <div className="text-center my-8">
@@ -198,17 +202,7 @@ const override = css`
             </section >
 
         </>
-    );
- 
-                                            }
-     
-                                            const mapStatetoProps = state => {
-                                                {
-                                                const {communityData} = state
-                                                console.log({communityData})
-                                                return{
-                                                communityData
-                                                }
-                                                }
-                                                }
-  export default UserDashboard
+    )  }
+    export default UserDashboard
+
+                        
