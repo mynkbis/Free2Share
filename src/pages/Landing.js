@@ -26,9 +26,9 @@ export default function Landing() {
                 <CreateCommunityForm /> */}
                 {/* <Content /> */}
                 {/* <CommunityDashboard /> */}
-                {/* <CreateNewPost /> */}
+                <CreateNewPost />
                 {/* <PostPage /> */}
-                < UserDashboard />
+                {/* < UserDashboard /> */}
             </main>
             <DefaultFooter />
         </>

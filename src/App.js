@@ -12,6 +12,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
+import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 
 function App() {
    
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/createCommunity" component={CreateCommunityForm} />
             <Redirect from="*" to="/" />
         </Switch>
         // </BrowserRouter>

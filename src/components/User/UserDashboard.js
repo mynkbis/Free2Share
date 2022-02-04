@@ -22,7 +22,9 @@ import { css } from '@emotion/react';
 import { connect } from 'react-redux';
 import PostSectionCard from '../../components/PostSectionCard'
 // import { fetchCommunities } from '../../redux/community/actions/communityActions';
-
+import Pagination from '../../components/Pagination'
+import CreateCommunityForm from 'components/Community/CreateCommunityForm';
+import { useHistory } from 'react-router-dom'; 
 
 
 const InputFile = styled('input')({
@@ -30,10 +32,21 @@ const InputFile = styled('input')({
 });
 
 function UserDashboard() {
+    let history = useHistory();
     // const dispatch = useDispatch();
     const [communityList, setCommunityList] = useState([])
     const [userDetails, setUserDetails] = useState({})
     const [postDetails, setPostDetails] = useState([])
+        const [currentPage,setCurrentPage]=useState(1)
+    const [postPerPage] = useState(4)
+  
+  const indexofLastPost = currentPage * postPerPage;
+ const indexofFirstPost = indexofLastPost - postPerPage;
+
+ //changing page on paginate
+const paginate = pageNumber => {
+    setCurrentPage(pageNumber)
+} 
 
     // fetching the community details of the user from store
 
@@ -67,13 +80,14 @@ function UserDashboard() {
     })
         .then(res => {
             setPostDetails(postDetails => [...postDetails, res.data])
-            console.log(postDetails);
+          
         })
         .catch(function (error) {
             console.log(error.toJSON());
         })
         , [])
-
+        console.log(postDetails[0]);
+      
     const override = css`
   display: block;
   margin: 0 auto;
@@ -91,7 +105,7 @@ function UserDashboard() {
 
 
                                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                                    <Button color="lightBlue" ripple="light" >
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createCommunity")}}>
                                         Create New Community
                                     </Button>
 
@@ -177,15 +191,19 @@ function UserDashboard() {
                                             <H5 color="gray">Posted by User</H5>
                                         </div></div>
                                 </div></div>
-                            <div className="flex flex-wrap">
 
-                                {postDetails[0]? postDetails[0].map((item, index) => {
-                                    return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />
-                                }) :<FadeLoader />}
-                             
- 
+                            <div className="flex flex-wrap">
+                      {postDetails[0]?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />: <FadeLoader />}
+
+                                {/* {postDetails[0]?postDetails[0].map((item, index) => {return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />}):<FadeLoader />} */}
+                           
+                            </div> 
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >   
+                            {postDetails[0]?<Pagination paginate ={paginate} postsPerPage = {postPerPage} totalPosts = {postDetails[0].length} />:<FadeLoader />}
                             </div>
 
+                          
+    
 
 
                             {/* PhotoGallery Code starts here */}

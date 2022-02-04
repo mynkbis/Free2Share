@@ -3,18 +3,29 @@ import H6 from '@material-tailwind/react/Heading6';
 import Paragraph from '@material-tailwind/react/Paragraph';
 import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
+import ProfilePicture from 'assets/img/team-2-800x800.jpg';
+import PostPage from './Community/PostPage'
 
-export default function PostSectionCard(props) {
-   console.log(props.product_name, props.title)
+function PostSectionCard(props) {
+console.log(props.posts)
+               
     return (
-        <div className=" md:w-3/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-            <div className="px-6">
-                <Image src={props.img} alt="post" raised />
-                <div className="pt-6 text-center">
-                    <H6 color="gray"> {props.product_name}</H6>
-                <Paragraph color="blueGray">{props.title}</Paragraph>
-                   </div>
+        props.posts.map((item, index) =>         {
+            return (
+                <div className=" md:w-3/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                <div className="px-6">
+                    <Image src={ProfilePicture} alt="post" raised />
+                    <div className="pt-6 text-center">
+                        <H6 color="gray"> {item.product_name}</H6>
+                    <Paragraph color="blueGray">{item.title}</Paragraph>
+                       </div>
+                       <PostPage post = {item} />  {/* //View Posts Modal */}
+                </div>
             </div>
-        </div>
+             
+            )
+        }
+        )
     );
 }
+export default PostSectionCard

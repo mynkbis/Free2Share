@@ -14,15 +14,16 @@ import axios from 'axios';
 
 
 
-export default function CreateCommunityForm() {
+export default function CreateCommunityForm(props) {
+    console.log(props)
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [communityName, setCommunityName] = useState('')
     const [communityDesc, setCommunityDesc] = useState('');
     const [memberList, setMemberList] = useState([])
-    console.log({ memberId })
-    console.log({ memberList })
-    console.log(communityName, communityDesc)
+    // console.log({ memberId })
+    // console.log({ memberList })
+    // console.log(communityName, communityDesc)
     // const [showModalCode, setShowModalCode] = React.useState(false);
 
     function submitForm() {
@@ -31,7 +32,7 @@ export default function CreateCommunityForm() {
     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
         communityName: communityName,
         communityDescription: communityDesc,
-      createdByID: '61ec7ae59877e6be51d1cf63'
+      createdByID: props.user.userId
     }).then(function (response) {
       console.log(response);
     })
