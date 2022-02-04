@@ -18,20 +18,21 @@ import CommunityTestimonial from './CommunityTestimonial';
 import { useState } from 'react'
 import Input from '@material-tailwind/react/Input';
 import PostPage from './PostPage';
-
+import AddMembers from './AddMembers'
+import CommunityMemberList from './CommunityMemberList'
 import Stack from '@mui/material/Stack';
 import Textarea from "@material-tailwind/react/Textarea";
-
+import {useHistory} from 'react-router-dom'
 const InputFile = styled('input')({
     display: 'none',
 });
 
 export default function CommunityDashboard(props) {
+    let history = useHistory()
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [memberList, setMemberList] = useState([])
 
-    
     return (
         <>
            <section className="relative py-16 bg-gray-100">
@@ -52,15 +53,16 @@ export default function CommunityDashboard(props) {
                                 </div>
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                                <Button color="lightBlue" ripple="light">
-                                    Conntect
-                                </Button>
+                              <AddMembers />
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light"> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost")}}> 
                                         Add Post
                                     </Button>
-                                    
+                                    &nbsp;&nbsp;&nbsp;
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList")}}> 
+                                       Member List
+                                    </Button>
                                     </div>
                                 <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
@@ -93,32 +95,18 @@ export default function CommunityDashboard(props) {
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">Community Name</H3>
-                                <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
-                                    <Icon name="place" size="xl" />
-                                    -- Location --
-                                </div>
-                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
+                                <H3 color="gray">{props.location.state.communityName}</H3>
+                                                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Created by - Creative Tim Officer
+                                    Created by - {props.location.state.userId}
                                 </div>
-                                <div className="mb-2 text-gray-700 flex items-center justify-center gap-2">
-                                    <Icon name="account_balance" size="xl" />
-                                    Active Since - Date
-                                </div>
-                            </div>
+                                                           </div>
 
                             <div className="mb-10 py-2 border-t border-gray-200 text-center">
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                                         <LeadText color="blueGray">
-                                            Description of community -  An artist of considerable range, Jenna
-                                            the name taken by Melbourne-raised,
-                                            Brooklyn-based Nick Murphy writes,
-                                            performs and records all of his own
-                                            music, giving it a warm, intimate feel
-                                            with a solid groove structure. An artist
-                                            of considerable range.
+                                            Description of community -  {props.location.state.communityDescription}
                                         </LeadText>
                                         <div className="text-center my-8">
                                             <H5 color="gray">Posted by Members</H5>

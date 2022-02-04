@@ -20,13 +20,13 @@ export default function Landing() {
             </div>
             <main>
                 <Header />
-                {/* <WorkingSection />
-                <TeamSection />
-                <ContactSection />
-                <CreateCommunityForm /> */}
+                {/* {/* <WorkingSection /> */}
+                {/* // <TeamSection /> */}
+                {/* // <ContactSection /> */}
+                {/* <CreateCommunityForm />  */}
                 {/* <Content /> */}
-                {/* <CommunityDashboard /> */}
-                <CreateNewPost />
+                <CommunityDashboard />
+                {/* <CreateNewPost /> */}
                 {/* <PostPage /> */}
                 {/* < UserDashboard /> */}
             </main>

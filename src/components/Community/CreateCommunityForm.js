@@ -2,29 +2,26 @@ import { React, useState } from 'react';
 import H3 from '@material-tailwind/react/Heading3';
 import Paragraph from '@material-tailwind/react/Paragraph';
 import Input from '@material-tailwind/react/Input';
-import Icon from "@material-tailwind/react/Icon";
 import Button from '@material-tailwind/react/Button';
 import Textarea from "@material-tailwind/react/Textarea";
-import Modal from "@material-tailwind/react/Modal";
-import ModalHeader from "@material-tailwind/react/ModalHeader";
-import ModalBody from "@material-tailwind/react/ModalBody";
-import ModalFooter from "@material-tailwind/react/ModalFooter";
+import AddMembers from './AddMembers';
 import axios from 'axios';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom'; 
+toast.configure()
 
-
-
+const successToast = ()=>{
+    // // Set to 3sec
+    toast.success('Your Community has been created Successfully!', {position:toast. TOP_CENTER, autoClose:5000})
+     }
 
 export default function CreateCommunityForm(props) {
-    console.log(props)
-    const [showModal, setShowModal] = useState(false);
-    const [memberId, setMemberId] = useState([])
+    let history = useHistory()
+    // console.log(props.user.userId)
+  
     const [communityName, setCommunityName] = useState('')
     const [communityDesc, setCommunityDesc] = useState('');
-    const [memberList, setMemberList] = useState([])
-    // console.log({ memberId })
-    // console.log({ memberList })
-    // console.log(communityName, communityDesc)
-    // const [showModalCode, setShowModalCode] = React.useState(false);
 
     function submitForm() {
     console.log("inside submitForm");
@@ -32,9 +29,11 @@ export default function CreateCommunityForm(props) {
     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
         communityName: communityName,
         communityDescription: communityDesc,
-      createdByID: props.user.userId
+      createdByID: "61ec7ae59877e6be51d1cf63"
     }).then(function (response) {
       console.log(response);
+      {successToast()}
+    {history.push("/CommunityDashboard", { userId: "61ec7ae59877e6be51d1cf63" , communityName: communityName, communityDescription: communityDesc })}
     })
       .catch(function (error) {
         console.log(error);
@@ -67,59 +66,8 @@ export default function CreateCommunityForm(props) {
                             color="lightBlue" placeholder="Message"  
                             onChange={event => setCommunityDesc(event.target.value)} 
                             />
+                     
 
-
-                            <div className="flex justify-left mt-10">
-
-                                {/* Code for Add Member Modal */}
-
-                                <Button
-
-                                    color="lightBlue"
-                                    buttonType="link"
-                                    size="lg"
-                                    rounded={false}
-                                    block={false}
-                                    iconOnly={false}
-                                    onClick={(e) => setShowModal(true)}
-                                    ripple="light"
-                                >
-                                    <Icon name="person_add" /> Add Members to your Community
-                                </Button>
-
-                                <Modal size="regular" active={showModal} toggler={() => setShowModal(false)}>
-                                    <ModalHeader toggler={() => setShowModal(false)}>
-                                        Enter Email Address
-                                    </ModalHeader>
-                                    <ModalBody>
-                                        <Input
-                                            type="email"
-                                            placeholder="Email Address"
-                                            color="lightBlue"
-                                            onChange={event => setMemberId(event.target.value)}
-                                        />
-                                    </ModalBody>
-                                    <ModalFooter>
-
-                                        <Button
-                                            color="red"
-                                            buttonType="link"
-                                            onClick={(e) => setShowModal(false)}
-                                            ripple="dark"
-                                        >
-                                            Close
-                                        </Button>
-
-                                        <Button
-                                            color="green"
-                                            onClick={(e) => {setShowModal(false); setMemberList(oldArray => [...oldArray, memberId])}}
-                                            ripple="light"
-                                        >
-                                            Save Changes
-                                        </Button>
-                                    </ModalFooter>
-                                </Modal>
-                            </div>
                             <div className="flex justify-center mt-10">
                                 <Button color="lightBlue" ripple="light" type = "submit" onClick={submitForm}>
                                     Create My Community
@@ -129,6 +77,7 @@ export default function CreateCommunityForm(props) {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }
