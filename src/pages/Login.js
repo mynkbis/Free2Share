@@ -10,17 +10,16 @@ import SimpleFooter from 'components/SimpleFooter';
 import Page from 'components/login/Page';
 import Container from 'components/login/Container';
 import Label from "@material-tailwind/react/Label";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./Register.css"
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios"
 import ForgetPassword from './forgetPassword';
 
-export default function Login(props) {
+export default function Login() {
     const History=useHistory();
 const [error, setError]=useState(null);
 const [loading, setLoading]=useState(false);
-const[userData,setUserData]=useState("");
 
 const [value, SetValue]=useState({
     username:"",
@@ -32,8 +31,11 @@ const handleChange = (e) =>{
         [e.target.name]:e.target.value
       })
 }
+const [usersData, setUserData]=useState([]);
 
-const handleLogin=()=>{
+
+
+const handleLogin=(prop)=>{
 setError(null);
 setLoading(true);
 // console.log(value.username,value.password);
@@ -41,25 +43,27 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
     username: value.username,
     password: value.password
 }).then(function (response) {
-    console.log(response);
+    console.log(response); // raw data
     setLoading(false);
-    alert('signin Successfully');
-    setUserData(response.data)
-    localStorage.setItem("userData",response.data.accessToken)
+    alert('signin Successfully');  
+  localStorage.setItem("AccessToken",response.data.accessToken)
+  localStorage.setItem("userID",response.data.id)
+  console.log("for edit")// only required data
     History.push("/profile");      // need to update on later stage once user dashboard is ready
-  console.log("I am access token>>>>>", userData)
+    setUserData(response.data);
 })
     .catch(function (error) {
       console.log(error);
     });
 
  }
-
     return (
         <Page>
             <DefaultNavbar />
             <Container>
+          
                 <Card className="loginCard">
+              
                     <CardHeader color="lightBlue">
                         <H5 color="white" style={{ marginBottom: 0 }}>
                             Login
@@ -114,7 +118,7 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
                     </CardFooter>
                 </Card>
             </Container>
-            <SimpleFooter />
-        </Page>
+            <SimpleFooter/>
+            </Page>
     );
 }

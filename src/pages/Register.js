@@ -15,7 +15,7 @@ import { useHistory } from "react-router";
 import "./Register.css"
 import Validation from './Validation';
 import axios from "axios"
-
+// import termsCondition from './TermsCondition';
 
 export default function Register() {
     const History=useHistory();
@@ -186,7 +186,7 @@ setErrors(Validation(values));
                                 onChange={handleChange}
                               />
                                
-                         <a href='https://www.google.com'> <span className='Register_TNC' > Terms & Conditions</span></a>   
+                         <a href='./TermsCondition'> <span className='Register_TNC' > Terms & Conditions</span></a>   
                         
                          {errors.check && <p className='errors'>{errors.check}</p>} 
                         </div>

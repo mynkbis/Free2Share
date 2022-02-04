@@ -6,7 +6,7 @@ import Register from 'pages/Register';
 import ForgetPassword from 'pages/forgetPassword';
 import Home from 'pages/Home';
 import ProfileEditting from 'pages/ProfileUpdate';
-
+import termsCondition from 'pages/TermsCondition';
 // Font Awesome Style Sheet
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -25,6 +25,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/forgetPassword" component={ForgetPassword} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/TermsCondition" component={termsCondition} />
             <Redirect from="*" to="/" />
         </Switch>
         </BrowserRouter>

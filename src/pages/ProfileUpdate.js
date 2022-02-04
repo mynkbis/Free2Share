@@ -3,11 +3,29 @@ import Header from 'components/profile/Header';
 import H3 from '@material-tailwind/react/Heading3';
 import "./Register.css"
 import { useHistory } from "react-router";
+import { useState } from 'react';
 
 
 export default function ProfileEditting() {
     const History=useHistory();
-    
+    const[name,setName]=useState('');
+    const[image,setImage]=useState('');
+    const[hobbies,SetHobbies]=useState('');
+    const[dob,setDob]=useState('');
+    const[address,setAddress]=useState({
+        line1:"line1",
+        line2:"line2",
+        city:"city",
+        state:"state",
+        country:"country",
+        pin_code:"pin_code",
+        });
+
+    const[gender,setGender]=useState("");
+
+
+
+
   const save=()=>{
 History.push("./profile")
   }

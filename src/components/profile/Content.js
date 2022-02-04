@@ -7,29 +7,34 @@ import ProfilePicture from 'assets/img/team-2-800x800.jpg';
 import { Link, useHistory } from "react-router-dom";
 // import EditIcon from '@mui/icons-material/Edit';
 // const user=getuser();
+import axios from "axios"   
+import { useEffect, useState } from 'react';
+import Login from 'pages/Login';
+
 export default function Content(props) {
 let History=useHistory();
-
-
+const [usersData, setUsersData]=useState([]);
+const[username,setUsername]=useState('');
 const editProfile=()=>{
-   History.push('./profileUpdate')
+   History.push('./profileUpdate')  // will redirect to edit page
   
     }
      
     const backtoDashboard=()=>{
-console.log("user dashbooard"); // will be linked to user dashboard for now landing page
+console.log("user dashbooard"); // will be linked to user dashboard for now landing/home page
 History.push('./landing')
     }
 
-    // const logOut=(props)=>{
-    //     // removeUserSession();
-    //     // history.push('./login')
-    // }
+    const logOut=(props)=>{
+        localStorage.removeItem("AccessToken")
+        localStorage.removeItem("userID");   // once logout it will delete/clear the local storage data
+History.push('./login')
+    }
+
     return (
       
         <section className="relative py-16 bg-gray-100">
-     
-            <div className="container max-w-7xl px-4 mx-auto">
+                 <div className="container max-w-7xl px-4 mx-auto">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-2xl -mt-64">
                     <div className="px-6">
                         <div className="flex flex-wrap justify-center">
@@ -58,15 +63,15 @@ History.push('./landing')
                                 >
                                     back
                                 </Button>
-                                {/* <Button color="lightBlue" ripple="light"
+                                 <Button color="lightBlue" ripple="light"
                                 onClick={logOut}
                                 >
                                     Signout
-                                </Button> */}
+                                </Button> 
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                 <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                                    <div className="mr-4 p-3 text-center">
+                                    {/* <div className="mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
                                             22
                                         </span>
@@ -89,7 +94,7 @@ History.push('./landing')
                                         <span className="text-sm text-gray-700">
                                             Comments
                                         </span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
