@@ -28,18 +28,15 @@ const colors = {
     red: 'bg-red-500',
 };
 
-export default function PostCard({ title, children }) {
+export default function PostCard({ post_title, product_name, product_desc, post_type }) {
     return (
         <div className="w-full md:w-4/12 px-4 mx-auto flex justify-center mt-24 lg:mt-0">
                         <Card>
                             <CardImage className="object-cover" alt="Card Image" src={Img} style={{"height" : "350px", "Object-fit":"cover"}} />
                             <CardBody>
-                                <H6 color="gray">Post Title</H6>
+                                <H6 color="gray">{post_title} : {product_name}</H6>
                                 <Paragraph color="blueGray">
-                                    The Arctic Ocean freezes every winter and
-                                    much of the sea-ice then thaws every summer,
-                                    and that process will continue whatever
-                                    happens.
+                                    {product_desc}
                                 </Paragraph>
                             </CardBody>
                         </Card>
