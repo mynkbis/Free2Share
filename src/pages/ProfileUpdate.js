@@ -28,6 +28,7 @@ export default function ProfileEditting() {
 
   const save=()=>{
 History.push("./profile")
+
   }
     
     return (<>

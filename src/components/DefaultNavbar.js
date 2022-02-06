@@ -61,11 +61,11 @@ export default function DefaultNavbar() {
                                             Home
                                         </DropdownItem>
                                     </Link>
-                                    <Link to="/profile">
+                                    {/* <Link to="/profile">
                                         <DropdownItem color="lightBlue">
                                             Profile
                                         </DropdownItem>
-                                    </Link>
+                                    </Link> */}
                                     <Link to="/login">
                                         <DropdownItem color="lightBlue">
                                             Login

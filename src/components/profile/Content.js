@@ -22,7 +22,7 @@ const editProfile=()=>{
      
     const backtoDashboard=()=>{
 console.log("user dashbooard"); // will be linked to user dashboard for now landing/home page
-History.push('./landing')
+History.push('./userDashboard')
     }
 
     const logOut=(props)=>{

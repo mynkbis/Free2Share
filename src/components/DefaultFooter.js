@@ -1,6 +1,7 @@
 import H5 from '@material-tailwind/react/Heading5';
 import LeadText from '@material-tailwind/react/LeadText';
 import Icon from '@material-tailwind/react/Icon';
+import { Link } from 'react-router-dom';
 
 export default function DefaultFooter() {
     return (
@@ -83,47 +84,28 @@ export default function DefaultFooter() {
                                     </span>
                                     <ul className="list-unstyled">
                                         <li>
-                                            <a
-                                                href="https://www.creative-tim.com/presentation?ref=mtk"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-gray-700 hover:text-gray-900 block pb-2 text-sm"
-                                            >
-                                                About Us
-                                            </a>
+                                        <Link to="/">
+                                                Home
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                className="text-gray-700 hover:text-gray-900 block pb-2 text-sm"
-                                                target="_blank"
-                                                href=" https://www.creative-tim.com/blog?ref=mtk"
-                                            >
-                                                Blog
-                                            </a>
+                                        <Link to="/ContactUs">
+                                                Contact Us
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="https://www.github.com/creativetimofficial?ref=mtk"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-gray-700 hover:text-gray-900 block pb-2 text-sm"
-                                            >
-                                                Github
-                                            </a>
+                                        <Link to="/Login">
+                                                Login
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href=" https://www.creative-tim.com/templates/free?ref=mtk"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-gray-700 hover:text-gray-900 block pb-2 text-sm"
-                                            >
-                                                Free Products
-                                            </a>
+                                            <Link to="/Register">
+                                                Register
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="w-full lg:w-4/12 px-4">
+                                {/* <div className="w-full lg:w-4/12 px-4">
                                     <span className="block uppercase text-gray-900 text-sm font-serif font-medium mb-2">
                                         Other Resources
                                     </span>
@@ -169,7 +151,7 @@ export default function DefaultFooter() {
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -178,13 +160,7 @@ export default function DefaultFooter() {
                         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
                             <div className="text-sm text-gray-700 font-medium py-1">
                                 Copyright © {new Date().getFullYear()} Free2Share by{' '}
-                                <a
-                                    href="https://www.creative-tim.com?ref=mtk"
-                                    className="text-gray-700 hover:text-gray-900 transition-all"
-                                >
                                     Soal (Monoceros Team)
-                                </a>
-                                .
                             </div>
                         </div>
                     </div>
