@@ -1,7 +1,7 @@
 import DefaultNavbar from 'components/DefaultNavbar';
 import DefaultFooter from 'components/DefaultFooter';
 import Header from 'components/landing/Header';
-import communityDashboard from 'components/Community/CommunityDashboard';
+import CommunityDashboard from 'components/Community/CommunityDashboard';
 
 export default function CreateCommunityForm() {
     return (
@@ -11,7 +11,7 @@ export default function CreateCommunityForm() {
             </div>
             <main>
                 <Header />
-               <communityDashboard />
+               <CommunityDashboard />
             </main>
             <DefaultFooter />
         </>

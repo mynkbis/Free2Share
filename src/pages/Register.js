@@ -11,12 +11,11 @@ import Page from 'components/login/Page';
 import Checkbox from '@material-tailwind/react/Checkbox';
 import Container from 'components/login/Container';
 import { useState } from 'react';
-import  { Redirect } from 'react-router-dom'
 import { useHistory } from "react-router";
 import "./Register.css"
 import Validation from './Validation';
 import axios from "axios"
-
+// import termsCondition from './TermsCondition';
 
 export default function Register() {
     const History=useHistory();
@@ -57,18 +56,7 @@ export default function Register() {
       }
 
 const Submit=(e)=>{  // submit function
-    
-
-   setValues({ 
-    name:"",
-    username:"",
-    mobile:"",
-    password:"",
-    cPassword:"",
-    check:''
-    })
-    
-        
+            
 setErrors(Validation(values));
       //  console.log(values, name, username, password)
     if(name && mobile  && username && password && values.check){
@@ -88,7 +76,16 @@ setErrors(Validation(values));
 
     } // if condition
 
+    setValues({ 
+        name:"",
+        username:"",
+        mobile:"",
+        password:"",
+        cPassword:"",
+        check:''
+        })
     } 
+    
         
     
 
@@ -125,9 +122,8 @@ setErrors(Validation(values));
                                 color="lightBlue"
                                 placeholder="Username"
                                 iconName="account_circle"
-                               
-                            />
-                        </div>
+                               />
+                              </div>
                         <div className="mb-10 px-4">
                             <InputIcon
                                 type="email"
@@ -190,7 +186,7 @@ setErrors(Validation(values));
                                 onChange={handleChange}
                               />
                                
-                         <a href='https://www.google.com'> <span className='Register_TNC' > Terms & Conditions</span></a>   
+                         <a href='./TermsCondition'> <span className='Register_TNC' > Terms & Conditions</span></a>   
                         
                          {errors.check && <p className='errors'>{errors.check}</p>} 
                         </div>

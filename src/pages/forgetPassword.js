@@ -12,7 +12,7 @@ import "./Register.css"
 import { useHistory } from "react-router-dom";
 import axios from "axios"
 import { Label } from '@material-tailwind/react';
-import { isConditionalExpression } from 'typescript';
+//import { isConditionalExpression } from 'typescript';
 
 export default function ForgetPassword(props) {
     const History=useHistory();
@@ -37,7 +37,7 @@ export default function ForgetPassword(props) {
       setUserid(response.data.id);
       console.log(userid);
       setOtp_pass_field_active("active");
-    //History.push("/Login");      // need to update on later stage once user dashboard is ready
+   // History.push("/Login");      // need to update on later stage once user dashboard is ready
   })
     .catch(function (error) {
       console.log(error);
@@ -54,7 +54,7 @@ export default function ForgetPassword(props) {
                 console.log(response); 
                   alert("OTP Verified and password has been changed.");
                   setOtp_pass_field_active("active");
-                History.push("/Login");      // need to update on later stage once user dashboard is ready
+                History.push("/Login");      
               })
                 .catch(function (error) {
                   console.log(error);
@@ -65,11 +65,7 @@ export default function ForgetPassword(props) {
   else{
     alert("Please enter email address.")
   }
- 
   }
-
-
-
 
     return (<>
         <Page>
