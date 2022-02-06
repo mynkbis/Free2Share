@@ -60,6 +60,7 @@ export default function CommunityDashboard(props) {
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;
+                                    {/* <Button color="lightBlue" ripple="light">  */}
                                     <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList")}}> 
                                        Member List
                                     </Button>
@@ -95,9 +96,11 @@ export default function CommunityDashboard(props) {
                             </div>
 
                             <div className="text-center my-8">
+                                <H3 color="gray">COMMUNITY NAME</H3>
                                 <H3 color="gray">{props.location.state.communityName}</H3>
                                                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
+                                    Created by - USER NAME
                                     Created by - {props.location.state.userId}
                                 </div>
                                                            </div>
@@ -107,6 +110,7 @@ export default function CommunityDashboard(props) {
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                                         <LeadText color="blueGray">
                                             Description of community -  {props.location.state.communityDescription}
+                                            Description of community -  
                                         </LeadText>
                                         <div className="text-center my-8">
                                             <H5 color="gray">Posted by Members</H5>
@@ -219,7 +223,8 @@ export default function CommunityDashboard(props) {
 
                                             <Button
                                                 color="green"
-                                                onClick={(e) => { setShowModal(false); setMemberList(oldArray => [...oldArray, memberId]) }}
+                                                onClick={(e) => { setShowModal(false); }}
+                                                // onClick={(e) => { setShowModal(false); setMemberList(oldArray => [...oldArray, memberId]) }}
                                                 ripple="light"
                                             >
                                                 Save Changes

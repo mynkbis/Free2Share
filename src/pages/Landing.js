@@ -23,9 +23,9 @@ export default function Landing() {
                 {/* {/* <WorkingSection /> */}
                 {/* // <TeamSection /> */}
                 {/* // <ContactSection /> */}
-                {/* <CreateCommunityForm />  */}
+                <CreateCommunityForm /> 
                 {/* <Content /> */}
-                <CommunityDashboard />
+                {/* <CommunityDashboard /> */}
                 {/* <CreateNewPost /> */}
                 {/* <PostPage /> */}
                 {/* < UserDashboard /> */}
