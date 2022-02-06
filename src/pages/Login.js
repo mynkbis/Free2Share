@@ -49,7 +49,7 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
   localStorage.setItem("AccessToken",response.data.accessToken)
   localStorage.setItem("userID",response.data.id)
   console.log("for edit")// only required data
-    History.push("/profile");      // need to update on later stage once user dashboard is ready
+    History.push("/userDashboard");      // need to update on later stage once user dashboard is ready
     setUserData(response.data);
 })
     .catch(function (error) {

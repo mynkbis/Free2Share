@@ -9,16 +9,16 @@ export default function DefaultFooter() {
                 <div className="container max-w-7xl mx-auto px-4">
                     <div className="flex flex-wrap text-center lg:text-left pt-6">
                         <div className="w-full lg:w-6/12 px-4">
-                            <H5 color="gray">Material Tailwind</H5>
+                            <H5 color="gray">Free2Share</H5>
                             <div className="-mt-4">
                                 <LeadText color="blueGray">
-                                    Easy to use React components for Tailwind
-                                    CSS and Material Design.
+                                    Easy to borrow and share unused thing
+                                    within local community.
                                 </LeadText>
                             </div>
                             <div className="flex gap-2 mt-6 md:justify-start md:mb-0 mb-8 justify-center">
                                 <a
-                                    href="https://www.facebook.com/CreativeTim"
+                                    href="https://www.facebook.com/free2shareOfficial"
                                     className="grid place-items-center bg-white text-blue-600 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -29,7 +29,7 @@ export default function DefaultFooter() {
                                     />
                                 </a>
                                 <a
-                                    href="https://www.twitter.com/creativetim"
+                                    href="https://www.twitter.com/Free2ShareLive"
                                     className="grid place-items-center bg-white text-blue-400 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -40,7 +40,7 @@ export default function DefaultFooter() {
                                     />
                                 </a>
                                 <a
-                                    href="https://www.instagram.com/creativetimofficial/"
+                                    href="https://www.instagram.com/free2shareofficial/"
                                     className="grid place-items-center bg-white text-indigo-500 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -50,17 +50,7 @@ export default function DefaultFooter() {
                                         name="fab fa-instagram"
                                     />
                                 </a>
-                                <a
-                                    href="https://www.dribbble.com/creativetim"
-                                    className="grid place-items-center bg-white text-pink-400 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Icon
-                                        family="font-awesome"
-                                        name="fab fa-dribbble"
-                                    />
-                                </a>
+                        
                                 <a
                                     href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w"
                                     className="grid place-items-center bg-white text-red-600 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
@@ -72,7 +62,7 @@ export default function DefaultFooter() {
                                         name="fab fa-youtube"
                                     />
                                 </a>
-                                <a
+                                {/* <a
                                     href="https://github.com/creativetimofficial"
                                     className="grid place-items-center bg-white text-gray-900 shadow-md font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none"
                                     target="_blank"
@@ -82,7 +72,7 @@ export default function DefaultFooter() {
                                         family="font-awesome"
                                         name="fab fa-github"
                                     />
-                                </a>
+                                </a> */}
                             </div>
                         </div>
                         <div className="w-full lg:w-6/12 px-4">
@@ -187,13 +177,12 @@ export default function DefaultFooter() {
                     <div className="flex flex-wrap items-center md:justify-between justify-center">
                         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
                             <div className="text-sm text-gray-700 font-medium py-1">
-                                Copyright © {new Date().getFullYear()} Material
-                                Tailwind by{' '}
+                                Copyright © {new Date().getFullYear()} Free2Share by{' '}
                                 <a
                                     href="https://www.creative-tim.com?ref=mtk"
                                     className="text-gray-700 hover:text-gray-900 transition-all"
                                 >
-                                    Creative Tim
+                                    Soal (Monoceros Team)
                                 </a>
                                 .
                             </div>
