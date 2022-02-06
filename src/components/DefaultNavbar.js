@@ -20,13 +20,13 @@ export default function DefaultNavbar() {
         <Navbar color="blue" navbar>
             <NavbarContainer>
                 <NavbarWrapper>
-                    <a
-                        href="https://material-tailwind.com?ref=mtk"
+                    {/* <a
+                        href="#"
                         target="_blank"
                         rel="noreferrer"
-                    >
-                        <NavbarBrand>Free 2 Share</NavbarBrand>
-                    </a>
+                    > */}
+                        <NavbarBrand><Link to="/">Free 2 Share</Link></NavbarBrand>
+                    {/* </a> */}
                     <NavbarToggler
                         onClick={() => setOpenNavbar(!openNavbar)}
                         color="white"
@@ -84,11 +84,11 @@ export default function DefaultNavbar() {
                                 </Dropdown>
                             </div>
                            
-                            <a
+                            {/* <a
                                 href="#"
                                 target="_blank"
                                 rel="noreferrer"
-                            >
+                            > */}
                                 <Button
                                     color="transparent"
                                     className="bg-red text-white ml-4"
@@ -98,13 +98,13 @@ export default function DefaultNavbar() {
                                             Login
                                     </Link>
                                 </Button>
-                            </a>
+                            {/* </a> */}
 
-                            <a
+                            {/* <a
                                 href="#"
                                 target="_blank"
                                 rel="noreferrer"
-                            >
+                            > */}
                                 <Button
                                     color="transparent"
                                     className="bg-red text-white ml-4"
@@ -114,7 +114,7 @@ export default function DefaultNavbar() {
                                             Register
                                     </Link>
                                 </Button>
-                            </a>
+                            {/* </a> */}
                         </div>
                     </Nav>
                 </NavbarCollapse>

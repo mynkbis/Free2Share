@@ -13,6 +13,7 @@ import Label from "@material-tailwind/react/Label";
 import { useEffect, useState } from 'react';
 import "./Register.css"
 import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import axios from "axios"
 import ForgetPassword from './forgetPassword';
 
@@ -96,11 +97,11 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
                             {error && <p className='error_login'>{error}</p>}
                         </div>
                         <div className="mb--4 px-4">
-                       <a href='./ForgetPassword'> <Label color="lightBlue">Forget password</Label></a> 
+                        <Link to="/ForgetPassword"><Label color="lightBlue">Forget password</Label></Link>
                        {/* <Link to ={'./forgetPassword.js'}>Forget Password</Link> */}
                        </div>
                        <div class="Forget_already">
-                       <a href='./Register'>Create an Account !</a>
+                       <Link to='/Register'>Create an Account !</Link>
                                                </div>
                     </CardBody>
                     <CardFooter>

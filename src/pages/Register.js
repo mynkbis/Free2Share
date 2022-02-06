@@ -12,6 +12,7 @@ import Checkbox from '@material-tailwind/react/Checkbox';
 import Container from 'components/login/Container';
 import { useState } from 'react';
 import { useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 import "./Register.css"
 import Validation from './Validation';
 import axios from "axios"
@@ -190,7 +191,7 @@ setErrors(Validation(values));
                         
                          {errors.check && <p className='errors'>{errors.check}</p>} 
                         </div>
-                        <a href='./Login'><span className='Already_login'>Already have an Account !</span></a>
+                        <Link to='/Login'><span className='Already_login'>Already have an Account !</span></Link>
                     <CardFooter>
                         <div className="flex justify-center">
                             <Button
