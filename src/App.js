@@ -14,6 +14,12 @@ import Home from 'pages/Home';
 import ProfileEditting from 'pages/ProfileUpdate';
 import termsCondition from 'pages/TermsCondition';
 import UserDashboardPage from 'pages/UserDashboardPage';
+import IncorrectPassword from './components/User/IncorrectPasswordModal'
+import NotVerifiedUserModal from './components/User/NotVerifiedUserModal'
+import UserNotFound from './components/User/UserNotFound'
+import Logout from 'pages/Logout';
+
+
 
 // Font Awesome Style Sheet
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -21,6 +27,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
+import IncorrectPasswordModal from './components/User/IncorrectPasswordModal';
+
 
 
 
@@ -44,6 +52,10 @@ function App() {
             <Route exact path="/CreateNewPost" component={CreateNewPost} />
             <Route exact path="/TermsCondition" component={termsCondition} />
             <Route exact path="/userDashboardPage" component={UserDashboardPage} />
+            <Route exact path="/IncorrectPasswordModal" component={IncorrectPasswordModal} />
+            <Route exact path="/UserNotFound" component={UserNotFound} />
+            <Route exact path="/NotVerifiedUserModal" component={NotVerifiedUserModal} />
+            <Route exact path ="/Logout" component ={Logout} />
             <Redirect from="*" to="/" />
         </Switch>
         </BrowserRouter>

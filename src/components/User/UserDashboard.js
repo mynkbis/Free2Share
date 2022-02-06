@@ -25,7 +25,8 @@ import PostSectionCard from '../../components/PostSectionCard'
 import Pagination from '../../components/Pagination'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 import { useHistory } from 'react-router-dom'; 
-
+import GetDate  from 'components/GetDate';
+ 
 
 const InputFile = styled('input')({
     display: 'none',
@@ -50,8 +51,12 @@ const paginate = pageNumber => {
 
     // fetching the community details of the user from store
 
+//getting the userid from the localstorage
+let userId = ((localStorage.getItem("userID")))
+console.log(userId)
+
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-        "userID": "61ec7ae59877e6be51d1cf63"
+        "userID": userId
     })
         .then(res => setCommunityList(communityList => [...communityList, res]))
         .catch(function (error) {
@@ -62,21 +67,21 @@ const paginate = pageNumber => {
 
 
     // fetching the user details from user table
-    // useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
-    //     "userID" : "61ec7ae59877e6be51d1cf63"
-    // })
-    // .then(res => {setUserDetails(res.data) 
-    //     console.log(userDetails);})  
-    // .catch(function (error) {
-    //     console.log(error.toJSON());
-    //   })
-    // ,[]) 
-    //     console.log(userDetails);   
+    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
+        "userID" : userId
+    })
+    .then(res => {setUserDetails(res.data) 
+        console.log(userDetails);})  
+    .catch(function (error) {
+        console.log(error.toJSON());
+      })
+    ,[]) 
+        console.log(userDetails);   
 
 
     //fetching Posts from Post Table
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
-        "userID": "61ec7ae59877e6be51d1cf63"
+        "userID": userId
     })
         .then(res => {
             setPostDetails(postDetails => [...postDetails, res.data])
@@ -138,7 +143,7 @@ const paginate = pageNumber => {
 
                                     <div className="mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {communityList[0] ? communityList[0].data.length : <FadeLoader />}
+                                            {communityList[0] ? communityList[0].data.length : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Communities
@@ -166,15 +171,16 @@ const paginate = pageNumber => {
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">{userDetails?.data?.name}</H3>
+                                <H3 color="gray">{userDetails?.name}</H3>
                                 {/* <H3 color="gray">{communityList.data[0]}</H3> */}
                                 <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                     <Icon name="place" size="xl" />
                                     -- Location --
+                                    {userDetails?.data?.name}
                                 </div>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Member Since - date
+                                    Member Since - {GetDate( userDetails?.createdAt)}
                                 </div>
 
                             </div>
@@ -182,9 +188,6 @@ const paginate = pageNumber => {
                             <div className="mb-10 py-2 border-t border-gray-200 text-center">
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
-                                        <LeadText color="blueGray">
-                                            Gyaan about User
-                                        </LeadText>
                                         <div className="text-center my-8">
 
                                             {/* //The Posts Secion starts here */}
@@ -193,18 +196,14 @@ const paginate = pageNumber => {
                                 </div></div>
 
                             <div className="flex flex-wrap">
-                      {postDetails[0]?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />: <FadeLoader />}
+                      {postDetails[0]?.posts?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />:  <div className="w-full flex flex-col items-center">NO POST BY USER </div>}
 
                                 {/* {postDetails[0]?postDetails[0].map((item, index) => {return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />}):<FadeLoader />} */}
                            
                             </div> 
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >   
-                            {postDetails[0]?<Pagination paginate ={paginate} postsPerPage = {postPerPage} totalPosts = {postDetails[0].length} />:<FadeLoader />}
+                            {postDetails[0]?<Pagination paginate ={paginate} postsPerPage = {postPerPage} totalPosts = {postDetails[0].length} />:" "}
                             </div>
-
-                          
-    
-
 
                             {/* PhotoGallery Code starts here */}
                             <div className="text-center my-8">
