@@ -26,6 +26,7 @@ export default function CreateCommunityForm(props) {
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
+    console.log(communityName, " ", communityDesc)
     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
         communityName: communityName,
         communityDescription: communityDesc,

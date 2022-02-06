@@ -1,0 +1,63 @@
+.registerCard{
+    margin-top: 350px;
+  }
+.loginCard{
+    margin-top: 100px;
+  }
+.Register_TNC{
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+
+}
+.mb-4{
+    display: flex;
+    justify-content: space-between;
+    flex: auto;
+}
+/* 
+error field css */
+
+.errors{      
+
+    color: red;
+    font-size: 12px;
+}
+
+.error_login{
+    color: red;
+    margin: 5px;
+    padding-top: 15px;
+}
+
+.forgetpass_background{
+    background-color: rgb(240, 251, 255);
+    border: 10px solid white;
+    border-radius: 5%;
+    padding: 2px;
+   
+}
+.Forget_already > a{
+    font-size: .80rem;
+    padding: 25px;
+    position: relative;
+    bottom: 25px;
+    left:150px;
+    color:orange;
+   
+}
+   
+.Already_login{
+    font-size: .80rem;
+    padding: 25px;
+    position: relative;
+    bottom: 5px;
+    left:80px;
+    color:orange;
+}
+
+.Forget_email{
+    padding: 30px;
+   justify-content: center;
+
+}

@@ -163,7 +163,6 @@ export default function CreateNewPost(props) {
                                                       
   <div className="flex-right gap-8 mt-16 mb-12">
   <H6 color="lightBlue">General Location</H6>
-
                                 <Input
                                     type="text"
                                     placeholder="General Location"

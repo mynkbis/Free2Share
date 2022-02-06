@@ -11,7 +11,7 @@ const colors = {
     deepOrange: 'bg-deep-orange-500',
     orange: 'bg-orange-500',
     amber: 'bg-amber-500',
-    yellow: 'bg-yellow-600',
+    yellow: 'bg-yellow-600', 
     lime: 'bg-lime-500',
     lightGreen: 'bg-light-green-500',
     green: 'bg-green-500',
@@ -26,17 +26,13 @@ const colors = {
     red: 'bg-red-500',
 };
 
-export default function StatusCard({ color, icon, title, children }) {
+export default function StatusCard({ title, children }) {
     return (
-        <div className="w-full md:w-4/12 px-4 flex justify-center text-center">
+        <div className="w-full md:w-6/12 p-8 flex justify-center text-center mt-25px mb-25px mx-auto">
             <Card>
                 <CardBody>
-                    <div
-                        className={`p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-md rounded-full ${colors[color]}`}
-                    >
-                        <Icon name={icon} size="xl" color="white" />
-                    </div>
-                    <H6 color="gray">{title}</H6>
+                    
+                    <H6 color="red">{title}</H6>
                     <Paragraph color="blueGray">{children}</Paragraph>
                 </CardBody>
             </Card>
