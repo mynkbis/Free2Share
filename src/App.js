@@ -7,7 +7,6 @@ import ForgetPassword from 'pages/forgetPassword';
 import Home from 'pages/Home';
 import ProfileEditting from 'pages/ProfileUpdate';
 import termsCondition from 'pages/TermsCondition';
-import Home from 'pages/Home';
 import UserDashboard from 'pages/UserDashboard';
 import CreateCommunityForm from 'pages/CreateCommunity';
 import CommunityDashboard from 'pages/communityDashboard';

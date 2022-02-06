@@ -5,11 +5,13 @@ import PostCard from 'components/PostCard';
 import React from 'react';
 import PostSection from 'components/PostSection';
 import AboutSection from 'components/AboutSection';
+import HowItWorks from 'components/landing/HowItWorks';
 
 function Home() {
   return <div>
       <DefaultNavbar/>
       <QuoteCard />
+      <HowItWorks />
       <PostSection />
       <AboutSection />
 
