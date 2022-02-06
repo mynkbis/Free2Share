@@ -14,7 +14,6 @@ function Home() {
       <HowItWorks />
       <PostSection />
       <AboutSection />
-
       <DefaultFooter />
   </div>;
 }
