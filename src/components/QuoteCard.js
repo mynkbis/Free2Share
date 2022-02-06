@@ -20,9 +20,9 @@ function QuoteCard() {
       });
     }
 
-  return <div>
-    <StatusCard title="Quote of the Day">
-    {Quote}
+  return   <div className="text-center my-8">
+    <StatusCard title="Quote of the Day" children = {Quote}>
+  
     </StatusCard>
   </div>;
 }

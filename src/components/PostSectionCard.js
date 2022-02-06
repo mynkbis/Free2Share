@@ -13,15 +13,14 @@ console.log(props.posts)
         props.posts.map((item, index) =>         {
             return (
                 <div className=" md:w-3/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6">
                     <Image src={ProfilePicture} alt="post" raised />
-                    <div className="pt-6 text-center">
+                    <div className="pt-6 items-center">
                         <H6 color="gray"> {item.product_name}</H6>
                     <Paragraph color="blueGray">{item.title}</Paragraph>
+                    <PostPage post = {item} />  {/* //View Posts Modal */}
                        </div>
-                       <PostPage post = {item} />  {/* //View Posts Modal */}
+                     
                 </div>
-            </div>
              
             )
         }

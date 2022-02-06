@@ -110,7 +110,7 @@ export default function CommunityDashboard(props) {
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                                         <LeadText color="blueGray">
                                             Description of community -  {props.location.state.communityDescription}
-                                            Description of community -  
+                                          
                                         </LeadText>
                                         <div className="text-center my-8">
                                             <H5 color="gray">Posted by Members</H5>

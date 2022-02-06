@@ -45,7 +45,7 @@ function UserDashboard() {
 
  //changing page on paginate
 const paginate = pageNumber => {
-    setCurrentPage(pageNumber)
+    setCurrentPage(pageNumber) 
 } 
 
     // fetching the community details of the user from store

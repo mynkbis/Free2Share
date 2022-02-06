@@ -1,17 +1,17 @@
 import DefaultNavbar from 'components/DefaultNavbar';
 import DefaultFooter from 'components/DefaultFooter';
 import Header from 'components/landing/Header';
-import Dashboard from 'components/user/Dashboard';
+import UserDashboard from '../components/User/UserDashboard'
 
-export default function UserDashboard() {
+export default function UserDashboardPage() {
     return (
         <>
             <div className="absolute w-full z-20">
-                <DefaultNavbar />
-            </div>
+                <DefaultNavbar /> 
+            </div> 
             <main>
                 <Header />
-                <Dashboard />
+                <UserDashboard />    
             </main>
             <DefaultFooter />
         </>
