@@ -31,38 +31,29 @@ console.log(props)
               
             <div className="container max-w-7xl mx-5 px-4">
             <ModalHeader toggler={() => setShowModal(false)}>
-               { props.post.post_title}
+               { props.post?.post_title}
                 </ModalHeader>
                   
                     <p className="text-base leading-relaxed text-gray-600 font-normal">
-                       Post Type : {props.post.post_type}
+                       Post Type : {props.post?.post_type}
                     </p>
                     <p className="text-base leading-relaxed text-gray-600 font-normal">
-                       Public Post : {props.post.isPublic?"Yes":"No"}
+                       Public Post : {props.post?.isPublic?"Yes":"No"}
                     </p>
                     <p className="text-base leading-relaxed text-gray-600 font-normal">
-                       Location : {props.post.generalLocation}
+                       Location : {props?.post?.generalLocation}
                     </p>
                     <p className="text-base leading-relaxed text-gray-600 font-normal">
                       Details : {props.post.product_description}
                     </p>
                     </div>
                     <div className="flex nowrap">
-                    <TeamCard
-                        img={Image1}
-                        name="Ryan Tompson"
-                        position="Web Developer"
-                    />
-                    <TeamCard
-                        img={Image2}
-                        name="Romina Hadid"
-                        position="Marketing Specialist"
-                    />
-                    <TeamCard
-                        img={Image3}
-                        name="Alexa Smith"
-                        position="UI/UX Designer"
-                    />
+                    {props.post?.product_images?.map(item => {
+                      
+                      return(<TeamCard
+                        img={item.url}
+                    />)  
+                    })}
               </div>
          
            
@@ -77,14 +68,7 @@ console.log(props)
                         Close
                     </Button>
 
-                    <Button
-                        color="green"
-                        onClick={(e) => setShowModal(false)}
-                        ripple="light"
-                    >
-                        Save Changes
-                    </Button>
-                </ModalFooter>
+                   </ModalFooter>
             </Modal>
         </>
     );

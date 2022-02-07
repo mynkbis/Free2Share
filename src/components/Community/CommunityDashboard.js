@@ -23,16 +23,20 @@ import CommunityMemberList from './CommunityMemberList'
 import Stack from '@mui/material/Stack';
 import Textarea from "@material-tailwind/react/Textarea";
 import {useHistory} from 'react-router-dom'
+import CommunityPostSection from '../CommunityPostSection'
 const InputFile = styled('input')({
     display: 'none',
 });
 
 export default function CommunityDashboard(props) {
+    console.log(props)
     let history = useHistory()
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [memberList, setMemberList] = useState([])
 
+    let userId = ((localStorage.getItem("userId")))
+    console.log(userId)
     return (
         <>
            <section className="relative py-16 bg-gray-100">
@@ -56,7 +60,7 @@ export default function CommunityDashboard(props) {
                               <AddMembers />
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost")}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityName:props.communityName})}}> 
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;
@@ -100,7 +104,7 @@ export default function CommunityDashboard(props) {
                                 <H3 color="gray">{props.location.state.communityName}</H3>
                                                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Created by - USER NAME
+Welcome User - {userId}
                                     Created by - {props.location.state.userId}
                                 </div>
                                                            </div>
@@ -109,7 +113,8 @@ export default function CommunityDashboard(props) {
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                                         <LeadText color="blueGray">
-                                            Description of community -  {props.location.state.communityDescription}
+                                            {/* Description of community -  */}
+                                             {props.location.state.communityDescription}
                                           
                                         </LeadText>
                                         <div className="text-center my-8">
@@ -117,36 +122,7 @@ export default function CommunityDashboard(props) {
                                         </div></div>
                                 </div>
                                 <div className="flex flex-wrap relative z-50">
-                                    <PostCard color="red" icon="cloud_upload" title="Lending Books">
-                                        <div>- Member name</div>
-                                        Description of the product being offered to be lent by the member
-                                        <div>  Status - Open / close </div>
-                                        {/* <PostPage /> */}
-                                    </PostCard>
-                                  
-                                    <PostCard
-                                        color="lightBlue"
-                                        icon="back_hand"
-                                        title="Wanted a Cat"
-                                    >
-                                        <div>- Member name</div>
-
-                                        Description of the product wanted by the member
-                                        <div>  Status - Open / close </div>
-                                        {/* <PostPage /> */}
-                                    </PostCard>
-                                  
-                                    <PostCard
-                                        color="teal"
-                                        icon="volunteer_activism"
-                                        title="Giving Away Photo Frames"
-                                    >
-                                        <div>- Member name</div>
-                                        Description of the product given away by the member
-                                        <div>  Status - Open / close </div>
-                                        {/* <PostPage /> */}
-                                    </PostCard>
-                                   
+                                   <CommunityPostSection />
                                 </div>
 
                                 {/* PhotoGallery Code starts here */}

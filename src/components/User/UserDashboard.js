@@ -26,7 +26,7 @@ import Pagination from '../../components/Pagination'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 import { useHistory } from 'react-router-dom'; 
 import GetDate  from 'components/GetDate';
- 
+ import UserPostSection from '../UserPostSection'
 
 const InputFile = styled('input')({
     display: 'none',
@@ -37,33 +37,22 @@ function UserDashboard() {
     // const dispatch = useDispatch();
     const [communityList, setCommunityList] = useState([])
     const [userDetails, setUserDetails] = useState({})
-    const [postDetails, setPostDetails] = useState([])
-        const [currentPage,setCurrentPage]=useState(1)
-    const [postPerPage] = useState(4)
-  
-  const indexofLastPost = currentPage * postPerPage;
- const indexofFirstPost = indexofLastPost - postPerPage;
-
- //changing page on paginate
-const paginate = pageNumber => {
-    setCurrentPage(pageNumber) 
-} 
-
-    // fetching the community details of the user from store
 
 //getting the userid from the localstorage
-let userId = ((localStorage.getItem("userID")))
+let userId = ((localStorage.getItem("userId")))
+let AccessToken = ((localStorage.getItem("AccessToken")))
 console.log(userId)
 
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-        "userID": userId
+        "userID": userId,
+        "AccessToken": AccessToken
     })
         .then(res => setCommunityList(communityList => [...communityList, res]))
         .catch(function (error) {
             console.log(error.toJSON());
         })
         , [])
-    // console.log(communityList);  
+     console.log(communityList);  
 
 
     // fetching the user details from user table
@@ -79,19 +68,20 @@ console.log(userId)
         console.log(userDetails);   
 
 
-    //fetching Posts from Post Table
-    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
-        "userID": userId
-    })
-        .then(res => {
-            setPostDetails(postDetails => [...postDetails, res.data])
+    // //fetching Posts from Post Table
+    // useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
+    //     // "userID": userId
+    //     "userID" : "61ec7ae59877e6be51d1cf63"
+    // })
+    //     .then(res => {
+    //         setPostDetails(postDetails => [...postDetails, res.data])
           
-        })
-        .catch(function (error) {
-            console.log(error.toJSON());
-        })
-        , [])
-        console.log(postDetails[0]);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error.toJSON());
+    //     })
+    //     , [])
+    //     console.log(postDetails[0]);
       
     const override = css`
   display: block;
@@ -134,7 +124,9 @@ console.log(userId)
                                                     objectFit: 'cover'
                                                 }}
                                                 src={ProfilePicture}
-                                            //  src={communityList[0]? communityList[0].data[0].community_image.url: <FadeLoader />}
+                                                // {userDetails.?data[0]?.user_image? src={userDetails.data[0].user_image.url}: 
+
+                                            //  src={userDetails? userDetails.data[0].user_image.url: {ProfilePicture}}
                                             />
                                         </div>
                                     </div>
@@ -176,7 +168,8 @@ console.log(userId)
                                 <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                     <Icon name="place" size="xl" />
                                     -- Location --
-                                    {userDetails?.data?.name}
+                                    {userDetails?.data?.address?.city} 
+                                    {/* check this after user address is updates */}
                                 </div>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
@@ -192,18 +185,11 @@ console.log(userId)
 
                                             {/* //The Posts Secion starts here */}
                                             <H5 color="gray">Posted by User</H5>
-                                        </div></div>
+                                         </div>
+                                         </div>
                                 </div></div>
 
-                            <div className="flex flex-wrap">
-                      {postDetails[0]?.posts?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />:  <div className="w-full flex flex-col items-center">NO POST BY USER </div>}
-
-                                {/* {postDetails[0]?postDetails[0].map((item, index) => {return <PostSectionCard img={ProfilePicture} product_name={item.product_name} title={item.post_title} />}):<FadeLoader />} */}
-                           
-                            </div> 
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >   
-                            {postDetails[0]?<Pagination paginate ={paginate} postsPerPage = {postPerPage} totalPosts = {postDetails[0].length} />:" "}
-                            </div>
+                        <UserPostSection />
 
                             {/* PhotoGallery Code starts here */}
                             <div className="text-center my-8">

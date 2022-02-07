@@ -23,6 +23,11 @@ export default function CreateCommunityForm(props) {
     const [communityName, setCommunityName] = useState('')
     const [communityDesc, setCommunityDesc] = useState('');
 
+    //getting the userid from the localstorage
+let userId = ((localStorage.getItem("userId")))
+let AccessToken = ((localStorage.getItem("AccessToken")))
+console.log(userId)
+
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
@@ -30,11 +35,13 @@ export default function CreateCommunityForm(props) {
     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
         communityName: communityName,
         communityDescription: communityDesc,
-      createdByID: "61ec7ae59877e6be51d1cf63"
+      createdByID: userId
     }).then(function (response) {
       console.log(response);
-      {successToast()}
-    {history.push("/CommunityDashboard", { userId: "61ec7ae59877e6be51d1cf63" , communityName: communityName, communityDescription: communityDesc })}
+      if(response.data.message === "Failed! This Community already exists."){history.push("/CommunityExistsModal")}
+      else {
+          {successToast()}
+    {history.push("/CommunityDashboardPage",{ communityId: response.data.communityID })}}
     })
       .catch(function (error) {
         console.log(error);

@@ -6,7 +6,7 @@ import Register from 'pages/Register';
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
-import CommunityDashboard from './components/Community/CommunityDashboard'
+import CommunityDashboardPage from 'pages/CommunityDashboardPage'
 import CommunityMemberList from './components/Community/CommunityMemberList'
 import CreateNewPost from './components/Community/CreateNewPost'
 import ForgetPassword from 'pages/forgetPassword';
@@ -17,9 +17,8 @@ import UserDashboardPage from 'pages/UserDashboardPage';
 import IncorrectPassword from './components/User/IncorrectPasswordModal'
 import NotVerifiedUserModal from './components/User/NotVerifiedUserModal'
 import UserNotFound from './components/User/UserNotFound'
+import CommunityExistsModal from './components/Community/CommunityExistsModal'
 import Logout from 'pages/Logout';
-
-
 
 // Font Awesome Style Sheet
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -28,11 +27,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/styles/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
 import IncorrectPasswordModal from './components/User/IncorrectPasswordModal';
-
-
-
-
-
 
 function App() {
    
@@ -47,7 +41,7 @@ function App() {
             <Route exact path="/forgetPassword" component={ForgetPassword} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/createCommunity" component={CreateCommunityForm} />
-            <Route exact path="/CommunityDashboard" component={CommunityDashboard} />
+            <Route exact path="/CommunityDashboardPage" component={CommunityDashboardPage} />
             <Route exact path="/CommunityMemberList" component={CommunityMemberList} />
             <Route exact path="/CreateNewPost" component={CreateNewPost} />
             <Route exact path="/TermsCondition" component={termsCondition} />
@@ -55,7 +49,9 @@ function App() {
             <Route exact path="/IncorrectPasswordModal" component={IncorrectPasswordModal} />
             <Route exact path="/UserNotFound" component={UserNotFound} />
             <Route exact path="/NotVerifiedUserModal" component={NotVerifiedUserModal} />
+            <Route exact path="/CommunityExistsModal" component={CommunityExistsModal} />
             <Route exact path ="/Logout" component ={Logout} />
+            
             <Redirect from="*" to="/" />
         </Switch>
         </BrowserRouter>

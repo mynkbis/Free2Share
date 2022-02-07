@@ -10,19 +10,17 @@ function PostSectionCard(props) {
 console.log(props.posts)
                
     return (
-        props.posts.map((item, index) =>         {
+        props?.posts?.map((item, index) =>         {
             return (
                 <div className=" md:w-3/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                    <Image src={ProfilePicture} alt="post" raised />
+                    <Image src={item.product_images[0]?.url} alt="post" raised />
                     <div className="pt-6 items-center">
                         <H6 color="gray"> {item.product_name}</H6>
                     <Paragraph color="blueGray">{item.title}</Paragraph>
                     <PostPage post = {item} />  {/* //View Posts Modal */}
-                       </div>
-                     
+                       </div>  
                 </div>
-             
-            )
+             )
         }
         )
     );

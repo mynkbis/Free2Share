@@ -2,13 +2,13 @@ import React from 'react';
 import PostCard from './PostCard';
 import axios from 'axios';
 import H5 from '@material-tailwind/react/Heading5';
-import PostSectionCard from '../components/PostSectionCard'
-import Pagination from '../components/Pagination'
+import PostSectionCard from './PostSectionCard'
+import Pagination from './Pagination'
 import FadeLoader from "react-spinners/FadeLoader";
 import { useState , useEffect} from 'react';
 
-function HomePostSection() {
-  const [postImages, setPostImages] = useState([])
+function UserPostSection(props) {
+  
 const [postDetails, setPostDetails] = useState([])
 const [currentPage,setCurrentPage]=useState(1)
 const [postPerPage] = useState(4)
@@ -18,8 +18,16 @@ const indexofFirstPost = indexofLastPost - postPerPage;
 const paginate = pageNumber => {
   setCurrentPage(pageNumber)
 } 
+
+//getting the userid from the localstorage
+let userId = ((localStorage.getItem("userId")))
+let AccessToken = ((localStorage.getItem("AccessToken")))
+console.log(userId)
+
   //fetching Posts from Post Table
-  useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showPublicPost')
+  useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
+    "userID" : userId
+})
     .then(res => {
         setPostDetails(postDetails => [...postDetails, res.data])
     })
@@ -29,8 +37,7 @@ const paginate = pageNumber => {
     , [])
     console.log(postDetails[0]);
 
-
-      return (
+   return (
   
    
       <>
@@ -55,4 +62,4 @@ const paginate = pageNumber => {
      )
 }
 
-export default HomePostSection;
+export default UserPostSection;

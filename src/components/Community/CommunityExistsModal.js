@@ -4,51 +4,44 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import Button from "@material-tailwind/react/Button";
-import { NavLink, useHistory } from 'react-router-dom'
-import FadeLoader from "react-spinners/FadeLoader";
+import {useHistory} from 'react-router-dom'
 
-export default function CommunityListModal(props) {
+export default function CommunityExistsModal() {
     const History=useHistory();
-    const [showModal, setShowModal] = useState(false);
- console.log(props.list)
+    const [showModal, setShowModal] = React.useState(true);
+
     return (
         <>
-            <Button
+            {/* <Button
                 color="lightBlue"
                 type="button"
                 onClick={(e) => setShowModal(true)}
                 ripple="light"
             >
-               Your Communities
-            </Button>
+                Open regular Modal
+            </Button> */} 
 
-            <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
+            <Modal size="regular" active={showModal} toggler={() => setShowModal(false)}>
                 <ModalHeader toggler={() => setShowModal(false)}>
-                  Your Communities
+                 COMMUNITY NAME ALREADY USED
                 </ModalHeader>
                 <ModalBody>
-                   {props.list?props.list.map((item, index) => (
-       <li className='indent' key={index}>
-           <NavLink to={{
-        //    pathname:'/CommunityDashboardPage', 
-        //    state:{communityID :"{item._id}"}
-        }}>
-        {item.communityName}
-        </NavLink>
-        </li>)):<FadeLoader />}
-                   
+                    <p className="text-base leading-relaxed text-gray-600 font-normal">
+                    Sorry! This Community Name is already used. Please choose another name.
+                    </p>
                 </ModalBody>
                 <ModalFooter>
                     <Button 
                         color="red"
                         buttonType="link"
-                        onClick={(e) => setShowModal(false)}
+                        onClick={(e) => History.push("/createCommunity")}
                         ripple="dark"
                     >
                         Close
                     </Button>
 
-                  </ModalFooter>
+                   
+                </ModalFooter>
             </Modal>
         </>
     );

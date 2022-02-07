@@ -70,7 +70,10 @@ export default function DefaultNavbar(props) {
                                     <DropdownItem color="lightBlue">Login</DropdownItem> </Link>:
                                     <Link to="/Logout">
                                         <DropdownItem color="lightBlue">  Logout </DropdownItem>  </Link>}
-                                          
+                                        {props.flag?<Link to="/login">
+                                    <DropdownItem color="lightBlue">UserDashBoard</DropdownItem> </Link>:
+                                    <Link to="/UserDashboardPage">
+                                        <DropdownItem color="lightBlue">UserDashboard</DropdownItem>  </Link>}         
                                   
                                        
 
