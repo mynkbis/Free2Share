@@ -3,7 +3,7 @@ import DefaultNavbar from 'components/DefaultNavbar';
 import QuoteCard from 'components/QuoteCard';
 import PostCard from 'components/PostCard';
 import React from 'react';
-import PostSection from 'components/PostSection';
+import HomePostSection from 'components/HomePostSection';
 import AboutSection from 'components/AboutSection';
 import HowItWorks from 'components/landing/HowItWorks';
 
@@ -12,7 +12,7 @@ function Home() {
       <DefaultNavbar/>
       <QuoteCard />
       <HowItWorks />
-      <PostSection />
+      <HomePostSection />
       <AboutSection />
       <DefaultFooter />
   </div>;

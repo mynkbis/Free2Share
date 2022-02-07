@@ -13,7 +13,7 @@ import DropdownItem from '@material-tailwind/react/DropdownItem';
 import Icon from '@material-tailwind/react/Icon';
 import Button from '@material-tailwind/react/Button'; 
 
-export default function DefaultNavbar() {
+export default function DefaultNavbar(props) {
     const [openNavbar, setOpenNavbar] = useState(false);
 
     return (
@@ -66,11 +66,17 @@ export default function DefaultNavbar() {
                                             Profile
                                         </DropdownItem>
                                     </Link> */}
-                                    <Link to="/login">
-                                        <DropdownItem color="lightBlue">
-                                            Login
-                                        </DropdownItem>
-                                    </Link>
+                               {props.flag?<Link to="/login">
+                                    <DropdownItem color="lightBlue">Login</DropdownItem> </Link>:
+                                    <Link to="/Logout">
+                                        <DropdownItem color="lightBlue">  Logout </DropdownItem>  </Link>}
+                                        {props.flag?<Link to="/login">
+                                    <DropdownItem color="lightBlue">UserDashBoard</DropdownItem> </Link>:
+                                    <Link to="/UserDashboardPage">
+                                        <DropdownItem color="lightBlue">UserDashboard</DropdownItem>  </Link>}         
+                                  
+                                       
+
                                     <Link to="/register">
                                         <DropdownItem color="lightBlue">
                                             Register
@@ -84,37 +90,8 @@ export default function DefaultNavbar() {
                                 </Dropdown>
                             </div>
                            
-                            {/* <a
-                                href="#"
-                                target="_blank"
-                                rel="noreferrer"
-                            > */}
-                                <Button
-                                    color="transparent"
-                                    className="bg-red text-white ml-4"
-                                    ripple="dark"
-                                >
-                                   <Link to="/login">
-                                            Login
-                                    </Link>
-                                </Button>
-                            {/* </a> */}
-
-                            {/* <a
-                                href="#"
-                                target="_blank"
-                                rel="noreferrer"
-                            > */}
-                                <Button
-                                    color="transparent"
-                                    className="bg-red text-white ml-4"
-                                    ripple="dark"
-                                >
-                                   <Link to="/register">
-                                            Register
-                                    </Link>
-                                </Button>
-                            {/* </a> */}
+            
+                               
                         </div>
                     </Nav>
                 </NavbarCollapse>

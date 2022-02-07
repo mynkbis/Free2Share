@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 const count = 3;
 
-export default function CommunityMemberList() {
-
+export default function CommunityMemberList(props) {
+console.log(props.location.state.communityId)
    const [list, setList] = useState([])
 
   useEffect(() => {

@@ -12,37 +12,80 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
 import Checkbox from "@material-tailwind/react/Checkbox"
+import {Alert} from 'components/Community/Alert'
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
 
 const InputFile = styled('input')({
     display: 'none',
 });
 
+const successToast = ()=>{
+    // // Set to 3sec
+    toast.success('Post created successfully!', {position:toast. TOP_CENTER, autoClose:5000})
+     }
 
-
-export default function CreateNewPost() {
+export default function CreateNewPost(props) {
   
     const [postTitle, setPostTitle] = useState('')
+    const [postType, setPostType] = useState('')
+    const [isPublicFlag, setIsPublicFlag] = useState(false)
     const [postLocation, setPostLocation] = useState('');
+    const [itemName, setItemName] = useState('')
     const [postDetails, setPostDetails] = useState('')
-    // console.log({ memberId })
-    // console.log({ memberList })
-    // console.log(communityName, communityDesc)
-    // const [showModalCode, setShowModalCode] = React.useState(false);
-
+    const [submissionSuccessful, setSubmissionSuccessful]=useState(false)
+    
+    
+   
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
-//     axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
-//         communityName: communityName,
-//         communityDescription: communityDesc,
-//       createdByID: '61ec7ae59877e6be51d1cf63'
-//     }).then(function (response) {
-//       console.log(response);
-//     })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
+  axios.post("https://soal-capstone-project.herokuapp.com/createPost",
+  {
+    communityID: '61f67e7b56da8ef394dc31df',
+    post_title: postTitle,
+    product_name: itemName,
+    product_description : postDetails,
+    post_type: postType,
+    isPublic: isPublicFlag,
+    generalLocation: postLocation,
+    post_status: "Available",
+    postedby: "61ec7ae59877e6be51d1cf63"
+}
+// {
+//     "communityID": "61f67e7b56da8ef394dc31df",
+//     "post_title": "mobile for lend",
+//     "product_name": "Redmi Note 9 Pro",
+//     "product_description" : "RAM 4 GB , Storage 64 GB, 5.6' Display",
+//     "post_type": "lend",
+//     "isPublic": false,
+//     "generalLocation": "my building",
+//     "post_status": "Available",
+//     "postedby": "61ec7ae59877e6be51d1cf63"
+// }
+    ).then(function (response) {
+    //   console.log(response);
+    //   setSubmissionSuccessful(true)
+    {successToast()}
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
    }
+
+   console.log("postTitle", postTitle,"itemName", itemName, "postDetails", postDetails,"postType", postType , "isPublicFlag", isPublicFlag, "postLocation", postLocation)
+  const handlePostTypeRadioButtons = e => {
+    const { id } = e.target;
+    setPostType(id);
+  };
+  const handlePostisPublic = e => {
+    const { id } = e.target;
+  setIsPublicFlag(id)
+    
+  };
+
     return (
         <div className="flex flex-wrap justify-center mt-24">
             <div className="w-full lg:w-8/12 px-4">
@@ -74,40 +117,46 @@ export default function CreateNewPost() {
             text="Lend"
             id="lend"
             name="posttype"
+            onChange={handlePostTypeRadioButtons}
         />
         <Radio
             color="lightBlue"
             text="Borrow"
             id="borrow"
             name="posttype"
+            onChange={handlePostTypeRadioButtons}
         />
           <Radio
             color="lightBlue"
             text="Want"
             id="want"
             name="posttype"
+            onChange={handlePostTypeRadioButtons}
         />
         <Radio
             color="lightBlue"
             text="Gift"
             id="gift"
             name="posttype"
+            onChange={handlePostTypeRadioButtons}
         />
         </div>
 {/* // Give away post open to only this community or public? */}
 <div className="flex-right gap-8 mt-16 mb-12">
-<H6 color="lightBlue">If Gifting, make it public?</H6>
+<H6 color="lightBlue">If Gifting / Wanted, make it public Post?</H6>
 <Radio
             color="lightBlue"
             text="Yes"
-            id="want"
+            id="yes"
             name="makeitpublic"
+            onChange=  {handlePostisPublic}
         />
         <Radio
             color="lightBlue"
             text="No"
-            id="gift"
+            id="no"
             name="makeitpublic"
+            onChange=  {handlePostisPublic}
         />
         </div>
                                                        {/* location */}
@@ -119,6 +168,18 @@ export default function CreateNewPost() {
                                     placeholder="General Location"
                                     color="lightBlue"
                                     onChange={event => setPostLocation(event.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex-right gap-8 mt-16 mb-12">
+  <H6 color="lightBlue">Item Name</H6>
+  
+                                <Input
+                                    type="text"
+                                    placeholder="Item Name"
+                                    color="lightBlue"
+                                    onChange={event => setItemName(event.target.value)}
                                     required
                                 />
                             </div>
@@ -145,11 +206,13 @@ export default function CreateNewPost() {
                                 <Button color="lightBlue" ripple="light" type = "submit" onClick={submitForm}>
                                     Add Post
                                 </Button>
+                                    {/* {submissionSuccessful?{successToast}:<></>} */}
                             </div>
                             </form >
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

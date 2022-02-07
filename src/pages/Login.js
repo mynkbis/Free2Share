@@ -17,10 +17,13 @@ import { Link } from 'react-router-dom';
 import axios from "axios"
 import ForgetPassword from './forgetPassword';
 
-export default function Login() {
+
+export default function Login(props) {
+
     const History=useHistory();
 const [error, setError]=useState(null);
 const [loading, setLoading]=useState(false);
+const [flag, setFlag]=useState(true);
 
 const [value, SetValue]=useState({
     username:"",
@@ -44,23 +47,28 @@ axios.post("https://soal-capstone-project.herokuapp.com/signin",{
     username: value.username,
     password: value.password
 }).then(function (response) {
-    console.log(response); // raw data
     setLoading(false);
-    alert('signin Successfully');  
+    console.log(response.data.message);
+  if(response.data.message === "user not verified"){ History.push("/NotVerifiedUserModal");}  // need to update on later stage once response message is ready
+  else if(response.data.message === 'User Not found.'){ History.push("/UserNotFound");} 
+  else if(response.data.message === "Invalid Password!"){ History.push("/IncorrectPasswordModal");} 
+  else
+   { alert('signin Successfully');  
   localStorage.setItem("AccessToken",response.data.accessToken)
-  localStorage.setItem("userID",response.data.id)
+  localStorage.setItem("userId",response.data.id)
   console.log("for edit")// only required data
-    History.push("/userDashboard");      // need to update on later stage once user dashboard is ready
+    History.push("/UserDashboardPage");      
     setUserData(response.data);
+setFlag(false)}
 })
     .catch(function (error) {
-      console.log(error);
+      console.log(error.message);
     });
 
  }
     return (
         <Page>
-            <DefaultNavbar />
+            <DefaultNavbar flag={flag}/>
             <Container>
           
                 <Card className="loginCard">

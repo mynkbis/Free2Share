@@ -2,6 +2,7 @@ import Card from '@material-tailwind/react/Card';
 import CardBody from '@material-tailwind/react/CardBody';
 import Icon from '@material-tailwind/react/Icon';
 import H6 from '@material-tailwind/react/Heading6';
+import H5 from '@material-tailwind/react/Heading5';
 import Paragraph from '@material-tailwind/react/Paragraph';
 
 const colors = {
@@ -28,12 +29,12 @@ const colors = {
 
 export default function StatusCard({ title, children }) {
     return (
-        <div className="w-full md:w-6/12 p-8 flex justify-center text-center mt-25px mb-25px mx-auto">
+        <div className="w-full md:w-12/12 p-8 flex justify-center text-center mt-25px mb-25px mx-auto">
             <Card>
                 <CardBody>
                     
-                    <H6 color="red">{title}</H6>
-                    <Paragraph color="blueGray">{children}</Paragraph>
+                    <H5 color="red">{title}</H5>
+                    <H6 color="blueGray">{children}</H6>
                 </CardBody>
             </Card>
         </div>
