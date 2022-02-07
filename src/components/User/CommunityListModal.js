@@ -28,10 +28,11 @@ export default function CommunityListModal(props) {
                 </ModalHeader>
                 <ModalBody>
                    {props.list?props.list.map((item, index) => (
+                      
        <li className='indent' key={index}>
            <NavLink to={{
-        //    pathname:'/CommunityDashboardPage', 
-        //    state:{communityID :"{item._id}"}
+           pathname:'/CommunityDashboardPage', 
+           state:{communityId :item._id}
         }}>
         {item.communityName}
         </NavLink>

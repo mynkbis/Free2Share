@@ -10,12 +10,13 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import IconButton from '@mui/material/IconButton';
+import {axios} from 'axios';
 import PostCard from 'components/landing/PostCard'
 import PhotoGallery from 'components/landing/PhotoGallery'
 import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import CommunityTestimonial from './CommunityTestimonial';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from '@material-tailwind/react/Input';
 import PostPage from './PostPage';
 import AddMembers from './AddMembers'
@@ -29,14 +30,25 @@ const InputFile = styled('input')({
 });
 
 export default function CommunityDashboard(props) {
-    console.log(props)
+    console.log(props.communityId )
     let history = useHistory()
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [memberList, setMemberList] = useState([])
+    const [communityData, setCommunityData] = useState({})
+
+     // fetching the community details from community table for that specific id
+     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunityByID', {
+        "communityID" :props.communityId
+    })    .then(res => {
+        console.log(res);})  
+    .catch(function (error) {
+        console.log(error.toJSON());
+      }),[]) 
+        // console.log(communityData);   
 
     let userId = ((localStorage.getItem("userId")))
-    console.log(userId)
+    // console.log(userId)
     return (
         <>
            <section className="relative py-16 bg-gray-100">

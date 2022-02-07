@@ -4,6 +4,9 @@ import Header from 'components/landing/Header';
 import CommunityDashboard from 'components/Community/CommunityDashboard';
 
 export default function CommunityDashboardPage(props) {
+  const community_id=props.location.state.communityId
+    console.log(props)
+    // {props.state.location.communityId?(community_id= props.state.location.communityId): (community_id=props.location.communityId)}
     return (
         <>
             <div className="absolute w-full z-20">
@@ -11,7 +14,7 @@ export default function CommunityDashboardPage(props) {
             </div>
             <main>
                 <Header /> 
-               <CommunityDashboard communityId = {props.state.location.communityId}/>
+               <CommunityDashboard communityId={community_id}/>
             </main>
             <DefaultFooter />
         </>
