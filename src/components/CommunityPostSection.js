@@ -8,7 +8,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import { useState , useEffect} from 'react';
 
 function CommunityPostSection(props) {
-  
+  console.log(props.communityID)
 const [postDetails, setPostDetails] = useState([])
 const [postImages, setPostImages] = useState([])
 const [currentPage,setCurrentPage]=useState(1)
@@ -20,17 +20,19 @@ const paginate = pageNumber => {
   setCurrentPage(pageNumber)
 } 
   //fetching Posts from Post Table
-  useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showPost',{
-    "communityID": "61f67e7b56da8ef394dc31df"
+  useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPost',{
+    "communityID": props.communityID
   })
     .then(res => {
+      console.log("hello")
         setPostDetails(postDetails => [...postDetails, res.data])
     })
     .catch(function (error) {
         console.log(error.toJSON());
     })
     , [])
-    console.log(postDetails[0]);
+
+    console.log(postDetails);
 
    return (
   
