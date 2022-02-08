@@ -8,27 +8,27 @@ import axios from 'axios';
 const count = 3;
 
 export default function CommunityMemberList(props) {
-console.log(props.location.state.communityId)
+console.log(props.location.state.communityMember)
    const [list, setList] = useState([])
 
-  useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then((res) => { setList(res.data) })
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`https://jsonplaceholder.typicode.com/users`)
+  //     .then((res) => { setList(res.data) })
+  // }, []);
 
-  console.log(list);
+  // console.log(list);
 
   return (
     <div className="flex-center max-w-7xl mx-auto px-4 lg:pt-24">
         <List
         itemLayout="horizontal"
-        dataSource={list}
+        dataSource={props.location.state.communityMember}
         renderItem={item => (
           <List.Item
             actions={[<a key="list-loadmore-edit">Remove</a>, <a key="list-loadmore-more">Edit</a>, <a key="list-loadmore-more">Chat</a>]}
           >
             <List.Item.Meta
-              title={item.name}
+              title={item.memberid}
             />
           </List.Item>
         )}

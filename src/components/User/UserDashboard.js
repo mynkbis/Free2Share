@@ -151,6 +151,15 @@ console.log(userId)
                                         </span>
                                     </div>
 
+                                    <div className="mr-4 p-3 text-center">
+                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
+                                            0
+                                        </span>
+                                        <span className="text-sm text-gray-700">
+                                            Notifications
+                                        </span>
+                                    </div>
+
                                     <div className="lg:mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
                                             8

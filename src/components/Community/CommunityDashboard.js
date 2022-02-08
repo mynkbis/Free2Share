@@ -26,6 +26,8 @@ import Textarea from "@material-tailwind/react/Textarea";
 import {useHistory} from 'react-router-dom'
 import CommunityPostSection from '../CommunityPostSection'
 import CommunityDashboardPage from '../../pages/CommunityDashboardPage'
+import UserListModal from 'components/User/UserListModal';
+
 const InputFile = styled('input')({
     display: 'none',
 });
@@ -76,23 +78,25 @@ export default function CommunityDashboard(props) {
                               <AddMembers />
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityName:props.communityName})}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData[0]?.communityId})}}> 
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;
                                     {/* <Button color="lightBlue" ripple="light">  */}
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList")}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList",{communityMember:communityData[0]?.communityMember} )}}> 
                                        Member List
+                                      
                                     </Button>
                                     </div>
+                                    {/* <UserListModal communityMember={communityData[0]?.communityMember}/> */}
                                 <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                         <div className="mr-4 p-3 text-center">
                                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                                22
+                                            {communityData[0]?.communityMember?.length}
                                             </span>
                                             <span className="text-sm text-gray-700">
-                                                Friends
+                                                Members
                                             </span>
                                         </div>
                                         <div className="mr-4 p-3 text-center">
@@ -132,13 +136,15 @@ Welcome User - {userId}
                                              {communityData[0]?.communityDescription}
                                           
                                         </LeadText>
-                                        <div className="text-center my-8">
+                                       
                                             <H5 color="gray">Posted by Members</H5>
-                                        </div></div>
+                                         
+                                        </div>
+                                        <div className="text-center my-8"><CommunityPostSection communityID={communityId}/></div> 
                                 </div>
-                                <div className="flex flex-wrap relative z-50">
-                                   <CommunityPostSection communityID={communityId}/>
-                                </div>
+                               
+                                  
+                              
 
                                 {/* PhotoGallery Code starts here */}
                                 <div className="text-center my-8">
