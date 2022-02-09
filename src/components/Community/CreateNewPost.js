@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DefaultFooter from '../DefaultFooter'
 import DefaultNavbar from '../DefaultNavbar'
 import {useForm } from 'react-hook-form'
-
+import GetUploadFile from '../User/GetUploadFile'
 
 toast.configure()
 
@@ -51,9 +51,12 @@ export default function CreateNewPost(props) {
 let userId = ((localStorage.getItem("userId")))
 let AccessToken = ((localStorage.getItem("AccessToken")))
    
-useEffect(() => {
-    reset();
-}, {submissionSuccessful});
+// useEffect(() => {
+//     reset();
+// }, {submissionSuccessful});
+
+
+
 
     function submitForm() {
     console.log("inside submitForm");
@@ -72,17 +75,19 @@ useEffect(() => {
 }
     ).then(function (response) {
     //   console.log(response);
-      setSubmissionSuccessful(true)
-      setPostDetails('')
+    //   setSubmissionSuccessful(true)
+    //   setPostDetails('')
     {successToast()}
   
     })
       .catch(function (error) {
         console.log(error);
       });
-   
+    }
 
-   }
+    function uploadImage(){
+
+    }
 
    console.log("postTitle", postTitle,"itemName", itemName, "postDetails", postDetails,"postType", postType , "isPublicFlag", isPublicFlag, "postLocation", postLocation)
   const handlePostTypeRadioButtons = e => {
@@ -209,12 +214,21 @@ useEffect(() => {
 {/* Code for adding images */}
 <div className="flex-right gap-8 mt-16 mb-12">
 <H6 color="lightBlue">Add Image</H6>
-<label htmlFor="icon-button-file">
-<InputFile accept="image/*" id="icon-button-file" type="file" />
+<input
+  type="file"
+  name="file"
+  multiple
+  id="input-files"
+  class="form-control-file border"
+/>
+
+<GetUploadFile />
+{/* <label htmlFor="icon-button-file">
+<InputFile accept="image/*" id="icon-button-file" type="file" onClick={uploadImage}/>
                                         <IconButton color="primary" aria-label="upload picture (max 3)" component="span">
                                             <PhotoCamera />
                                         </IconButton>
-                                    </label>
+                                    </label> */}
 </div>
                             <div className="flex justify-center mt-10">
                                 <Button color="lightBlue" ripple="light" type = "submit" onClick={handleSubmit(submitForm)}>

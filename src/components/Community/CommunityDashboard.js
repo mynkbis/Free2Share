@@ -75,7 +75,7 @@ export default function CommunityDashboard(props) {
                                 </div>
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                              <AddMembers communityId = {communityId}/>
+                              {/* <AddMembers communityId = {communityId}/> */}
                          
                                     &nbsp;&nbsp;&nbsp;
                                     <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData[0]?.communityId})}}> 
