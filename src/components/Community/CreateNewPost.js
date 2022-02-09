@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import H6 from '@material-tailwind/react/Heading6';
 import H3 from '@material-tailwind/react/Heading3';
 import LeadText from "@material-tailwind/react/LeadText";
@@ -17,6 +17,8 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DefaultFooter from '../DefaultFooter'
 import DefaultNavbar from '../DefaultNavbar'
+import {useForm } from 'react-hook-form'
+
 
 toast.configure()
 
@@ -29,11 +31,13 @@ const InputFile = styled('input')({
 const successToast = ()=>{
     // // Set to 3sec
     toast.success('Post created successfully!', {position:toast. TOP_CENTER, autoClose:5000})
-   {()=> {clearFields}}
+    // reset()
+//    {clearFields()}
+}
      
 
 export default function CreateNewPost(props) {
-  
+    const {reset, handleSubmit} = useForm();
     const [postTitle, setPostTitle] = useState('')
     const [postType, setPostType] = useState('')
     const [isPublicFlag, setIsPublicFlag] = useState(false)
@@ -42,21 +46,15 @@ export default function CreateNewPost(props) {
     const [postDetails, setPostDetails] = useState('')
     const [submissionSuccessful, setSubmissionSuccessful]=useState(false)
     
-  function clearFields()
-  {
-          // clearFields();
-    setPostTitle('')
-    setPostType('')
-   setIsPublicFlag(false)
-    setPostLocation('');
-    setItemName('')
-    setPostDetails('')
-
-  }
+ 
     // /getting the userid from the localstorage
 let userId = ((localStorage.getItem("userId")))
 let AccessToken = ((localStorage.getItem("AccessToken")))
    
+useEffect(() => {
+    reset();
+}, {submissionSuccessful});
+
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
@@ -74,13 +72,16 @@ let AccessToken = ((localStorage.getItem("AccessToken")))
 }
     ).then(function (response) {
     //   console.log(response);
-    //   setSubmissionSuccessful(true)
+      setSubmissionSuccessful(true)
+      setPostDetails('')
     {successToast()}
-
+  
     })
       .catch(function (error) {
         console.log(error);
       });
+   
+
    }
 
    console.log("postTitle", postTitle,"itemName", itemName, "postDetails", postDetails,"postType", postType , "isPublicFlag", isPublicFlag, "postLocation", postLocation)
@@ -216,10 +217,11 @@ let AccessToken = ((localStorage.getItem("AccessToken")))
                                     </label>
 </div>
                             <div className="flex justify-center mt-10">
-                                <Button color="lightBlue" ripple="light" type = "submit" onClick={submitForm}>
+                                <Button color="lightBlue" ripple="light" type = "submit" onClick={handleSubmit(submitForm)}>
                                     Add Post
                                 </Button>
                                     {/* {submissionSuccessful?{successToast}:<></>} */}
+                                    <button type="button" onClick={() => reset()} className="btn btn-secondary">Reset</button>
                             </div>
                             </form >
                     </div>
