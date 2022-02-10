@@ -16,20 +16,19 @@ const props = {
   defaultFileList: [...fileList],
   onChange(info) {
     let fileList = [...info.fileList];
-    fileList = fileList.map(file => {
-      if (file.response) {
-        // Component will show file.url as link
-        //  file.url = file.response.url;
-     console.log(file)
-      }
-    
-      console.log(file[0].thumbUrl)
-    });
+    const file = fileList[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file.originFileObj);
+
+    reader.onload = (e) => {
+      const base64Image = e.target.result;
+      setImageUrl(base64Image);
+    };
   }
 };
    
 function uploadImage(){axios.post('https://soal-capstone-project.herokuapp.com/uploadPostImage', {
-    "product_image" : imageUrl.thumbUrl,
+    "product_image" : imageUrl,
     "postId":"6202cf3b8bee879a0ed109c7"
 })   
 .then(res =>  console.log(res))  
