@@ -14,17 +14,18 @@ import PostCard from 'components/landing/PostCard'
 import PhotoGallery from 'components/landing/PhotoGallery'
 import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { useState, useEffect, useDispatch } from 'react'
+import { useState, useEffect} from 'react'
 import axios from 'axios';
 import CommunityListModal from './CommunityListModal';
 import FadeLoader from "react-spinners/FadeLoader";
 import { css } from '@emotion/react';
-import { connect } from 'react-redux';
 import PostSectionCard from '../../components/PostSectionCard'
 // import { fetchCommunities } from '../../redux/community/actions/communityActions';
 import Pagination from '../../components/Pagination'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 import { useHistory } from 'react-router-dom'; 
+import {connect, useDispatch} from 'react-redux';
+import { fetchCommunityFailure, fetchCommunitySuccess } from '../../redux/communityAction'
 import GetDate  from 'components/GetDate';
  import UserPostSection from '../UserPostSection'
 
@@ -42,17 +43,24 @@ function UserDashboard() {
 let userId = ((localStorage.getItem("userId")))
 let AccessToken = ((localStorage.getItem("AccessToken")))
 console.log(userId)
+const dispatch = useDispatch()
 
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
         "userID": userId,
         "AccessToken": AccessToken
     })
-        .then(res => setCommunityList(communityList => [...communityList, res]))
+        .then(res => {setCommunityList(communityList => [...communityList, res])
+        console.log(res.data)
+    dispatch(fetchCommunitySuccess(res.data))
+        })
         .catch(function (error) {
-            console.log(error.toJSON());
+            console.log(error);
+            dispatch(fetchCommunityFailure(error))
         })
         , [])
      console.log(communityList);  
+// still to add provider
+
 
 
     // fetching the user details from user table
