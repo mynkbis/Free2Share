@@ -14,7 +14,7 @@ export default function CommunityDashboardPage(props) {
             </div>
             <main>
                 <Header /> 
-               <CommunityDashboard communityId={community_id}/>
+               <CommunityDashboard communityId="62016df9d18f14953cad48c1"/>
             </main>
             <DefaultFooter />
         </>

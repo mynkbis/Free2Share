@@ -5,14 +5,35 @@ import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import Button from "@material-tailwind/react/Button";
 import Title from 'components/landing/Title';
+import axios from 'axios'
 import TeamCard from 'components/landing/TeamCard';
-import Image1 from 'assets/img/team-1-800x800.jpg';
-import Image2 from 'assets/img/team-2-800x800.jpg';
-import Image3 from 'assets/img/team-3-800x800.jpg';
-import Image4 from 'assets/img/team-4-470x470.png';
 
 export default function PostPage(props) {
+    const [postedBy, setPostedBy]= useState('')
+    const [interestBy, setInterestBy] = useState('')
+    const [postId, setPostId]= useState('')
+    console.log(props)
     const [showModal, setShowModal] = React.useState(false);
+
+    let userId = ((localStorage.getItem("userId")))
+   
+    const handleInterested = () => {
+        setPostId(props.postId)
+    setPostedBy(props.postedby)
+    setInterestBy(userId)
+        axios.post('https://soal-capstone-project.herokuapp.com/Community', {
+           "postId": postId,
+            "postedBy":postedBy,
+            "interestBy":userId
+        })
+            .then(res => console.log("user will be notified"))
+            .catch(function (error) {
+                console.log(error.toJSON());
+            })
+            
+        }
+    
+
 console.log(props)
     return (
         <>
@@ -55,7 +76,11 @@ console.log(props)
                     />)  
                     })}
               </div>
-         
+              <div className="flex justify-center mt-10">
+                                <Button color="lightBlue" ripple="light" type = "submit" onClick={handleInterested}>
+                                   Interested
+                                </Button>
+                            </div>
            
                 </ModalBody>
                 <ModalFooter>
@@ -71,5 +96,5 @@ console.log(props)
                    </ModalFooter>
             </Modal>
         </>
-    );
+    )
 }

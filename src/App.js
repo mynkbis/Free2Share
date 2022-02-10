@@ -19,6 +19,7 @@ import NotVerifiedUserModal from './components/User/NotVerifiedUserModal'
 import UserNotFound from './components/User/UserNotFound'
 import CommunityExistsModal from './components/Community/CommunityExistsModal'
 import Logout from 'pages/Logout';
+import AddMembers from './components/Community/AddMembers'
 
 // Font Awesome Style Sheet
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -51,6 +52,7 @@ function App() {
             <Route exact path="/NotVerifiedUserModal" component={NotVerifiedUserModal} />
             <Route exact path="/CommunityExistsModal" component={CommunityExistsModal} />
             <Route exact path ="/Logout" component ={Logout} />
+            <Route exact path ="/AddMembers" component ={AddMembers} />
             
             <Redirect from="*" to="/" />
         </Switch>

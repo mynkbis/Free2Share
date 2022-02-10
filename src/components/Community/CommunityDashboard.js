@@ -10,7 +10,7 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import IconButton from '@mui/material/IconButton';
-import {axios} from 'axios';
+import axios from 'axios';
 import PostCard from 'components/landing/PostCard'
 import PhotoGallery from 'components/landing/PhotoGallery'
 import { styled } from '@mui/material/styles';
@@ -25,12 +25,17 @@ import Stack from '@mui/material/Stack';
 import Textarea from "@material-tailwind/react/Textarea";
 import {useHistory} from 'react-router-dom'
 import CommunityPostSection from '../CommunityPostSection'
+import CommunityDashboardPage from '../../pages/CommunityDashboardPage'
+import UserListModal from 'components/User/UserListModal';
+
 const InputFile = styled('input')({
     display: 'none',
 });
 
 export default function CommunityDashboard(props) {
-    console.log(props.communityId )
+    console.log(props.communityId)
+    const communityId = props.communityId
+    console.log(communityId)
     let history = useHistory()
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
@@ -39,16 +44,17 @@ export default function CommunityDashboard(props) {
 
      // fetching the community details from community table for that specific id
      useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunityByID', {
-        "communityID" :props.communityId
-    })    .then(res => {
-        console.log(res);})  
+        "communityID": communityId
+    })   
+    .then(res =>  setCommunityData(res.data))  
     .catch(function (error) {
         console.log(error.toJSON());
       }),[]) 
-        // console.log(communityData);   
+
+       
 
     let userId = ((localStorage.getItem("userId")))
-    // console.log(userId)
+    console.log(communityData)
     return (
         <>
            <section className="relative py-16 bg-gray-100">
@@ -60,7 +66,7 @@ export default function CommunityDashboard(props) {
                                 <div className="relative">
                                     <div className="w-40 -mt-20">
                                     <Image
-                                            src={ProfilePicture}
+                                            src={communityData[0]?.community_image.url}
                                             alt="Profile picture"
                                             raised
                                             rounded
@@ -69,26 +75,28 @@ export default function CommunityDashboard(props) {
                                 </div>
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                              <AddMembers />
+                              {/* <AddMembers communityId = {communityId}/> */}
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityName:props.communityName})}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData[0]?.communityId})}}> 
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;
                                     {/* <Button color="lightBlue" ripple="light">  */}
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList")}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList",{communityMember:communityData[0]?.communityMember} )}}> 
                                        Member List
+                                      
                                     </Button>
                                     </div>
+                                    {/* <UserListModal communityMember={communityData[0]?.communityMember}/> */}
                                 <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                         <div className="mr-4 p-3 text-center">
                                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                                22
+                                            {communityData[0]?.communityMember?.length}
                                             </span>
                                             <span className="text-sm text-gray-700">
-                                                Friends
+                                                Members
                                             </span>
                                         </div>
                                         <div className="mr-4 p-3 text-center">
@@ -112,12 +120,11 @@ export default function CommunityDashboard(props) {
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">COMMUNITY NAME</H3>
-                                <H3 color="gray">{props.location.state.communityName}</H3>
+                                <H3 color="gray">{communityData[0]?.communityName}</H3>
                                                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
 Welcome User - {userId}
-                                    Created by - {props.location.state.userId}
+                                <div> Community created by - {communityData[0]?.createdByID}</div>   
                                 </div>
                                                            </div>
 
@@ -126,16 +133,18 @@ Welcome User - {userId}
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                                         <LeadText color="blueGray">
                                             {/* Description of community -  */}
-                                             {props.location.state.communityDescription}
+                                             {communityData[0]?.communityDescription}
                                           
                                         </LeadText>
-                                        <div className="text-center my-8">
+                                       
                                             <H5 color="gray">Posted by Members</H5>
-                                        </div></div>
+                                         
+                                        </div>
+                                        <div className="text-center my-8"><CommunityPostSection communityID={communityId}/></div> 
                                 </div>
-                                <div className="flex flex-wrap relative z-50">
-                                   <CommunityPostSection />
-                                </div>
+                               
+                                  
+                              
 
                                 {/* PhotoGallery Code starts here */}
                                 <div className="text-center my-8">

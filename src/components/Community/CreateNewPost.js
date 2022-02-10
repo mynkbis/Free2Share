@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import H6 from '@material-tailwind/react/Heading6';
 import H3 from '@material-tailwind/react/Heading3';
 import LeadText from "@material-tailwind/react/LeadText";
@@ -15,9 +15,15 @@ import Checkbox from "@material-tailwind/react/Checkbox"
 import {Alert} from 'components/Community/Alert'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DefaultFooter from '../DefaultFooter'
+import DefaultNavbar from '../DefaultNavbar'
+import {useForm } from 'react-hook-form'
+import GetUploadFile from '../User/GetUploadFile'
 
 toast.configure()
 
+
+// last attempt was to make the form fields blank once the post is created
 const InputFile = styled('input')({
     display: 'none',
 });
@@ -25,10 +31,13 @@ const InputFile = styled('input')({
 const successToast = ()=>{
     // // Set to 3sec
     toast.success('Post created successfully!', {position:toast. TOP_CENTER, autoClose:5000})
-     }
+    // reset()
+//    {clearFields()}
+}
+     
 
 export default function CreateNewPost(props) {
-  
+    const {reset, handleSubmit} = useForm();
     const [postTitle, setPostTitle] = useState('')
     const [postType, setPostType] = useState('')
     const [isPublicFlag, setIsPublicFlag] = useState(false)
@@ -37,14 +46,24 @@ export default function CreateNewPost(props) {
     const [postDetails, setPostDetails] = useState('')
     const [submissionSuccessful, setSubmissionSuccessful]=useState(false)
     
-    
+ 
+    // /getting the userid from the localstorage
+let userId = ((localStorage.getItem("userId")))
+let AccessToken = ((localStorage.getItem("AccessToken")))
    
+// useEffect(() => {
+//     reset();
+// }, {submissionSuccessful});
+
+
+
+
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
   axios.post("https://soal-capstone-project.herokuapp.com/createPost",
   {
-    communityID: '61f67e7b56da8ef394dc31df',
+    communityID: props.communityId,
     post_title: postTitle,
     product_name: itemName,
     product_description : postDetails,
@@ -52,28 +71,23 @@ export default function CreateNewPost(props) {
     isPublic: isPublicFlag,
     generalLocation: postLocation,
     post_status: "Available",
-    postedby: "61ec7ae59877e6be51d1cf63"
+    postedby: userId
 }
-// {
-//     "communityID": "61f67e7b56da8ef394dc31df",
-//     "post_title": "mobile for lend",
-//     "product_name": "Redmi Note 9 Pro",
-//     "product_description" : "RAM 4 GB , Storage 64 GB, 5.6' Display",
-//     "post_type": "lend",
-//     "isPublic": false,
-//     "generalLocation": "my building",
-//     "post_status": "Available",
-//     "postedby": "61ec7ae59877e6be51d1cf63"
-// }
     ).then(function (response) {
     //   console.log(response);
     //   setSubmissionSuccessful(true)
+    //   setPostDetails('')
     {successToast()}
+  
     })
       .catch(function (error) {
         console.log(error);
       });
-   }
+    }
+
+    function uploadImage(){
+
+    }
 
    console.log("postTitle", postTitle,"itemName", itemName, "postDetails", postDetails,"postType", postType , "isPublicFlag", isPublicFlag, "postLocation", postLocation)
   const handlePostTypeRadioButtons = e => {
@@ -87,6 +101,11 @@ export default function CreateNewPost(props) {
   };
 
     return (
+        <>
+        <div className="absolute w-full z-20">
+        <DefaultNavbar />
+    </div>
+    <main>
         <div className="flex flex-wrap justify-center mt-24">
             <div className="w-full lg:w-8/12 px-4">
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
@@ -195,18 +214,28 @@ export default function CreateNewPost(props) {
 {/* Code for adding images */}
 <div className="flex-right gap-8 mt-16 mb-12">
 <H6 color="lightBlue">Add Image</H6>
-<label htmlFor="icon-button-file">
-<InputFile accept="image/*" id="icon-button-file" type="file" />
+<input
+  type="file"
+  name="file"
+  multiple
+  id="input-files"
+  class="form-control-file border"
+/>
+
+<GetUploadFile />
+{/* <label htmlFor="icon-button-file">
+<InputFile accept="image/*" id="icon-button-file" type="file" onClick={uploadImage}/>
                                         <IconButton color="primary" aria-label="upload picture (max 3)" component="span">
                                             <PhotoCamera />
                                         </IconButton>
-                                    </label>
+                                    </label> */}
 </div>
                             <div className="flex justify-center mt-10">
-                                <Button color="lightBlue" ripple="light" type = "submit" onClick={submitForm}>
+                                <Button color="lightBlue" ripple="light" type = "submit" onClick={handleSubmit(submitForm)}>
                                     Add Post
                                 </Button>
                                     {/* {submissionSuccessful?{successToast}:<></>} */}
+                                    <button type="button" onClick={() => reset()} className="btn btn-secondary">Reset</button>
                             </div>
                             </form >
                     </div>
@@ -214,5 +243,8 @@ export default function CreateNewPost(props) {
             </div>
             <ToastContainer />
         </div>
+          </main>
+          <DefaultFooter />
+      </>
     );
 }
