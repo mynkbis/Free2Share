@@ -20,12 +20,12 @@ import CommunityListModal from './CommunityListModal';
 import FadeLoader from "react-spinners/FadeLoader";
 import { css } from '@emotion/react';
 import PostSectionCard from '../../components/PostSectionCard'
-// import { fetchCommunities } from '../../redux/community/actions/communityActions';
 import Pagination from '../../components/Pagination'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 import { useHistory } from 'react-router-dom'; 
 import {connect, useDispatch} from 'react-redux';
 import { fetchCommunityFailure, fetchCommunitySuccess } from '../../redux/communityAction'
+import { fetchUserFailure, fetchUserSuccess } from '../../redux/userAction'
 import GetDate  from 'components/GetDate';
  import UserPostSection from '../UserPostSection'
 
@@ -33,11 +33,12 @@ const InputFile = styled('input')({
     display: 'none',
 });
 
-function UserDashboard() {
+function UserDashboard(props) {
+    console.log(props.userDetails.data)
+    console.log(props.communityList.data)
     let history = useHistory();
-    // const dispatch = useDispatch();
-    const [communityList, setCommunityList] = useState([])
-    const [userDetails, setUserDetails] = useState({})
+    // const [communityList, setCommunityList] = useState([])
+    // const [userDetails, setUserDetails] = useState({})
 
 //getting the userid from the localstorage
 let userId = ((localStorage.getItem("userId")))
@@ -46,20 +47,21 @@ console.log(userId)
 const dispatch = useDispatch()
 
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-        "userID": userId,
-        "AccessToken": AccessToken
+        "userID" : userId,
+      "AccessToken": AccessToken
     })
-        .then(res => {setCommunityList(communityList => [...communityList, res])
+        .then(res => {
+            // setCommunityList(communityList => [...communityList, res])
         console.log(res.data)
-    dispatch(fetchCommunitySuccess(res.data))
+    dispatch(fetchCommunitySuccess(res))
         })
         .catch(function (error) {
             console.log(error);
             dispatch(fetchCommunityFailure(error))
         })
         , [])
-     console.log(communityList);  
-// still to add provider
+    //  console.log(props.communityList);  
+
 
 
 
@@ -67,13 +69,17 @@ const dispatch = useDispatch()
     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
         "userID" : userId
     })
-    .then(res => {setUserDetails(res.data) 
-        console.log(userDetails);})  
+    .then(res => {
+        // setUserDetails(res.data) 
+        // console.log(userDetails);
+        dispatch(fetchUserSuccess(res))
+    })  
     .catch(function (error) {
         console.log(error.toJSON());
+         dispatch(fetchUserFailure(error))
       })
     ,[]) 
-        console.log(userDetails);   
+        
 
 
     // //fetching Posts from Post Table
@@ -114,7 +120,7 @@ const dispatch = useDispatch()
 
                                     &nbsp;&nbsp;&nbsp;
                                     {/* <Button color="lightBlue" ripple="light"> */}
-                                    <CommunityListModal list={communityList[0]?.data} />
+                                    <CommunityListModal list={props.communityList?.data} />
                                     {/* // </Button> */}
                                     &nbsp;&nbsp;&nbsp;
                                     <Button color="lightBlue" ripple="light">
@@ -124,18 +130,24 @@ const dispatch = useDispatch()
                                 <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                     <div className="relative">
                                         <div className="w-40 -mt-20">
-                                            <Image
+                                        {props.userDetails?.data?.user_image?    <Image
                                                 style={{
                                                     borderRadius: "50%",
                                                     width: '300px',
                                                     height: '300px',
                                                     objectFit: 'cover'
                                                 }}
-                                                src={ProfilePicture}
-                                                // {userDetails.?data[0]?.user_image? src={userDetails.data[0].user_image.url}: 
-
-                                            //  src={userDetails? userDetails.data[0].user_image.url: {ProfilePicture}}
-                                            />
+                                                // src={ProfilePicture}
+                                               src={props.userDetails.data.user_image.url} />: 
+                                                <Image
+                                               style={{
+                                                   borderRadius: "50%",
+                                                   width: '300px',
+                                                   height: '300px',
+                                                   objectFit: 'cover'
+                                               }}
+                                               src={ProfilePicture}
+                                            />}
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +155,7 @@ const dispatch = useDispatch()
 
                                     <div className="mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {communityList[0] ? communityList[0].data.length : 0}
+                                            {props.communityList.data ? props.communityList.data.length : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Communities
@@ -180,17 +192,17 @@ const dispatch = useDispatch()
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">{userDetails?.name}</H3>
+                                <H3 color="gray">{props.userDetails?.data?.name}</H3>
                                 {/* <H3 color="gray">{communityList.data[0]}</H3> */}
                                 <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                     <Icon name="place" size="xl" />
                                     -- Location --
-                                    {userDetails?.data?.address?.city} 
+                                    {props.userDetails?.data?.address?.city} 
                                     {/* check this after user address is updates */}
                                 </div>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Member Since - {GetDate( userDetails?.createdAt)}
+                                    Member Since - {GetDate( props.userDetails?.data?.createdAt)}
                                 </div>
 
                             </div>
@@ -223,6 +235,17 @@ const dispatch = useDispatch()
 
         </>
     )  }
-    export default UserDashboard
+    const mapStatetoProps = state => {
+        {
+             console.log(state)
+             return{
+        communityList:state.communityReducer.communities,
+        userDetails:state.userReducer.user
+        }
+        }
+        }
+    
+export default connect(mapStatetoProps)(UserDashboard) 
+
 
                         

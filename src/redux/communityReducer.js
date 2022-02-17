@@ -18,7 +18,7 @@ const initialState = {
     loading:true
     }
     case FETCH_COMMUNITY_SUCCESS:
-        console.log(action)
+        // console.log(action)
     return{
     ...state,
     loading:false,

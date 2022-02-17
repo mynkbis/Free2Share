@@ -6,10 +6,12 @@ import PostSectionCard from './PostSectionCard'
 import Pagination from './Pagination'
 import FadeLoader from "react-spinners/FadeLoader";
 import { useState , useEffect} from 'react';
+import {connect, useDispatch} from 'react-redux';
+import { fetchUserPostsFailure, fetchUserPostsSuccess } from '../redux/userPostsAction'
 
 function UserPostSection(props) {
-  
-const [postDetails, setPostDetails] = useState([])
+  console.log(props)
+// const [postDetails, setPostDetails] = useState([])
 const [currentPage,setCurrentPage]=useState(1)
 const [postPerPage] = useState(4)
 const indexofLastPost = currentPage * postPerPage;
@@ -23,19 +25,21 @@ const paginate = pageNumber => {
 let userId = ((localStorage.getItem("userId")))
 let AccessToken = ((localStorage.getItem("AccessToken")))
 console.log(userId)
+const dispatch = useDispatch()
 
   //fetching Posts from Post Table
   useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
     "userID" : userId
 })
     .then(res => {
-        setPostDetails(postDetails => [...postDetails, res.data])
+        dispatch(fetchUserPostsSuccess(res))
     })
     .catch(function (error) {
-        console.log(error.toJSON());
+        dispatch(fetchUserPostsFailure(error))
     })
     , [])
-    console.log(postDetails[0]);
+    // console.log(postDetails[0]);
+
 
    return (
   
@@ -61,5 +65,15 @@ console.log(userId)
 
      )
 }
+// still to complete the state management for posts
+const mapStatetoProps = state => {
+    {
+         console.log(state)
+         return{
+    userPosts:state.userPostsReducer.userPosts,
+   
+    }
+    }
+    }
 
-export default UserPostSection;
+export default connect(mapStatetoProps)(UserPostSection);

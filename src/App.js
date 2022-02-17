@@ -20,6 +20,7 @@ import UserNotFound from './components/User/UserNotFound'
 import CommunityExistsModal from './components/Community/CommunityExistsModal'
 import Logout from 'pages/Logout';
 import AddMembers from './components/Community/AddMembers'
+import {connect} from 'react-redux';
 
 // Font Awesome Style Sheet
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -33,7 +34,7 @@ function App() {
    
     return (
 
-        <BrowserRouter>
+         <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/profile" component={Profile} />
@@ -56,7 +57,7 @@ function App() {
             
             <Redirect from="*" to="/" />
         </Switch>
-        </BrowserRouter>
+         </BrowserRouter>
         );
 }
 

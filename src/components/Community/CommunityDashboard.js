@@ -27,12 +27,13 @@ import {useHistory} from 'react-router-dom'
 import CommunityPostSection from '../CommunityPostSection'
 import CommunityDashboardPage from '../../pages/CommunityDashboardPage'
 import UserListModal from 'components/User/UserListModal';
+import {connect} from 'react-redux'
 
 const InputFile = styled('input')({
     display: 'none',
 });
 
-export default function CommunityDashboard(props) {
+function CommunityDashboard(props) {
     console.log(props.communityId)
     const communityId = props.communityId
     console.log(communityId)
@@ -244,3 +245,14 @@ Welcome User - {userId}
         </>
     );
 }
+// const mapStatetoProps = state => {
+//     {
+//          console.log(state)
+//     // const {communityData} = state
+//     // console.log({communityData})
+//     return{
+//     communityList:state.communityReducer.communities
+//     }
+//     }
+//     }
+export default CommunityDashboard 
