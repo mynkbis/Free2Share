@@ -123,8 +123,7 @@ export default function CommunityDashboard(props) {
                                 <H3 color="gray">{communityData[0]?.communityName}</H3>
                                                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-Welcome User - {userId}
-                                <div> Community created by - {communityData[0]?.createdByID}</div>   
+                                <div> Community created by - {communityData[1]?.createdByName}</div>   
                                 </div>
                                                            </div>
 
