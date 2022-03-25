@@ -15,6 +15,7 @@ let History = useHistory();
 const [showModal, setShowModal] = React.useState(true);
     localStorage.removeItem("AccessToken")
   localStorage.removeItem("userID")
+  localStorage.removeItem("userId")
 
     return (
       <>
@@ -33,13 +34,10 @@ const [showModal, setShowModal] = React.useState(true);
                         color="red"
                         buttonType="link"
                         onClick={(e) => History.push("/login")}
-                        ripple="dark"
-                    >
+                        ripple="dark">
                         Close
                     </Button>
-
-                   
-                </ModalFooter>
+                    </ModalFooter>
             </Modal>
            
            <Login />

@@ -109,7 +109,7 @@ console.log(userId)
                                     <CommunityListModal list={communityList[0]?.data} />
                                     {/* // </Button> */}
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light">
+                                    <Button color="lightBlue" ripple="light" onClick={()=>{history.push("../profile")}} >
                                         Edit Profile
                                     </Button>
                                 </div>

@@ -68,8 +68,7 @@ useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserD
                                         //    width="800px"
                                         flex= "1"
                                         width= '100%'
-                                        height= '100%'
-                                        resizeMode= 'contain'
+                                       resizeMode= 'contain'
                                             />
                                         </div>
                                     </div>

@@ -22,12 +22,13 @@ const editProfile=()=>{
      
     const backtoDashboard=()=>{
 console.log("user dashbooard"); // will be linked to user dashboard for now landing/home page
-History.push('./userDashboard')
+History.push('/UserDashboardPage')
     }
 
     const logOut=(props)=>{
         localStorage.removeItem("AccessToken")
-        localStorage.removeItem("userID");   // once logout it will delete/clear the local storage data
+        localStorage.removeItem("userID"); 
+        localStorage.removeItem("userId");  // once logout it will delete/clear the local storage data
 History.push('./login')
     }
 
@@ -59,13 +60,11 @@ History.push('./login')
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
                                 
                                 <Button color="lightBlue" ripple="light"
-                                onClick={backtoDashboard}
-                                >
+                                onClick={backtoDashboard}>
                                     back
                                 </Button>
                                  <Button color="lightBlue" ripple="light"
-                                onClick={logOut}
-                                >
+                                onClick={logOut}>
                                     Signout
                                 </Button> 
                             </div>
