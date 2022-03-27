@@ -27,6 +27,8 @@ import {useHistory} from 'react-router-dom'
 import CommunityPostSection from '../CommunityPostSection'
 import CommunityDashboardPage from '../../pages/CommunityDashboardPage'
 import UserListModal from 'components/User/UserListModal';
+import authHeader from 'authHeader';
+import dateFormat from 'dateformat';
 
 const InputFile = styled('input')({
     display: 'none',
@@ -43,8 +45,8 @@ export default function CommunityDashboard(props) {
     const [communityData, setCommunityData] = useState({})
 
      // fetching the community details from community table for that specific id
-     useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunityByID', {
-        "communityID": communityId
+     useEffect(() => axios.get(`https://soal-capstone-project.herokuapp.com/showCommunityByID/${communityId}`, {
+        headers : authHeader()
     })   
     .then(res =>  setCommunityData(res.data))  
     .catch(function (error) {
@@ -121,7 +123,11 @@ export default function CommunityDashboard(props) {
 
                             <div className="text-center my-8">
                                 <H3 color="gray">{communityData[0]?.communityName}</H3>
-                                                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
+                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
+                                    <Icon name="work" size="xl" />
+                                    Community created on - {dateFormat(communityData?.createdAt, "mmm dS, yyyy")}
+                                </div>
+                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
                                 <div> Community created by - {communityData[1]?.createdByName}</div>   
                                 </div>
