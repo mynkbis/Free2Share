@@ -45,7 +45,7 @@ const paginate = pageNumber => {
                                         </div></div>
                                 </div></div>
       <div className="flex flex-wrap">
-      {postDetails[0]?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />: <p>NO POSTS BY USER</p>}
+      {postDetails[0]?<PostSectionCard posts = {postDetails[0].slice(indexofFirstPost, indexofLastPost)} />: <p>No post available...</p>}
                              </div> 
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >   
                             {postDetails[0]?<Pagination paginate ={paginate} postsPerPage = {postPerPage} totalPosts = {postDetails[0].length} />:" "}

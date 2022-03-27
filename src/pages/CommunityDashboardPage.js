@@ -13,8 +13,8 @@ export default function CommunityDashboardPage(props) {
                 <DefaultNavbar />
             </div>
             <main>
-                <Header /> 
-               <CommunityDashboard communityId="62016df9d18f14953cad48c1"/>
+             <Header title = "Community Dashboard" description = "Here you can make post which you don't require or want to lend out inside community communities, upload photos of the product, show interest in other post here."/>
+               <CommunityDashboard communityId={community_id}/>
             </main>
             <DefaultFooter />
         </>

@@ -40,6 +40,8 @@ function UserDashboard() {
     const [communityList, setCommunityList] = useState([])
     const [CommunityCount, setCommunityCount] = useState("0");
     const [PostCount, setPostCount] = useState("0");
+    const [PhotoCount, setPhotoCount] = useState("0");
+    const [NotificationCount, setNotificationCount] = useState("0");
     const [userDetails, setUserDetails] = useState({})
      const [userGallery, setUserGallery] = useState([])
 
@@ -84,10 +86,10 @@ function UserDashboard() {
     .then(res => {setUserDetails(res) 
         console.log(userDetails);})  
     .catch(function (error) {
-        console.log(error.toJSON());
+        console.log(error);
       })
     ,[]) 
-        console.log(userDetails);   
+        console.log("userDetais: ",userDetails);   
 
         //fetching Photos from Gallery Table
   useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showGallaryByUser', {
@@ -98,7 +100,7 @@ function UserDashboard() {
   
     })
     .catch(function (error) {
-        console.log(error.toJSON());
+        console.log(error);
     })
     , [])
     console.log(userGallery);
@@ -160,42 +162,42 @@ function UserDashboard() {
                                                 }}
                                                 
                                                 // src={ProfilePicture}
-                                             src={userDetails?.user_image?.url}
+                                             src={userDetails ? (userDetails?.data?.user_image?.url) : ProfilePicture}
 
                                             />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
+                                <div className="w-full lg:w-3/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
 
-                                    <div className="mr-4 p-3 text-center">
+                                    <div className="mr-3 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {CommunityCount}
+                                            {CommunityCount ? CommunityCount : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Communities
                                         </span>
                                     </div>
-
-                                    <div className="mr-4 p-3 text-center">
+                                   
+                                    <div className="mr-3 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {userGallery?.length}
+                                        {PhotoCount ? PhotoCount : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Photos
                                         </span>
                                     </div>
 
-                                    <div className="mr-4 p-3 text-center">
+                                    <div className="mr-3 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            0
+                                        {NotificationCount ? NotificationCount : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Notifications
                                         </span>
                                     </div>
 
-                                    <div className="lg:mr-4 p-3 text-center">
+                                    <div className="lg:mr-3 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
                                             {PostCount? PostCount : 0}
                                         </span>
@@ -207,12 +209,13 @@ function UserDashboard() {
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">{userDetails?.name}</H3>
+                                <H3 color="gray">{userDetails?.data?.name}</H3>
                                 {/* <H3 color="gray">{communityList.data[0]}</H3> */}
                                 <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                     <Icon name="place" size="xl" />
-                                    {userDetails?.address?.city}{", "}  
-                                    {userDetails?.address?.country}
+                                    {userDetails?.data?.address?.city}{", "}  
+                                    {userDetails?.data?.address?.state}{", "}  
+                                    {userDetails?.data?.address?.country}
                                 </div>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />

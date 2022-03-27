@@ -19,6 +19,7 @@ import DefaultFooter from '../DefaultFooter'
 import DefaultNavbar from '../DefaultNavbar'
 import {useForm } from 'react-hook-form'
 import GetUploadFile from '../User/GetUploadFile'
+import authHeader from 'authHeader';
 
 toast.configure()
 
@@ -45,24 +46,12 @@ export default function CreateNewPost(props) {
     const [itemName, setItemName] = useState('')
     const [postDetails, setPostDetails] = useState('')
     const [submissionSuccessful, setSubmissionSuccessful]=useState(false)
-    
- 
-    // /getting the userid from the localstorage
-let userId = ((localStorage.getItem("userId")))
-let AccessToken = ((localStorage.getItem("AccessToken")))
    
-// useEffect(() => {
-//     reset();
-// }, {submissionSuccessful});
-
-
-
-
     function submitForm() {
-    console.log("inside submitForm");
-    //  console.log(document.getElementById("inputName").value);
+    console.log("submiting new post", props.communityId);
   axios.post("https://soal-capstone-project.herokuapp.com/createPost",
   {
+    headers : authHeader(),
     communityID: props.communityId,
     post_title: postTitle,
     product_name: itemName,
@@ -71,7 +60,6 @@ let AccessToken = ((localStorage.getItem("AccessToken")))
     isPublic: isPublicFlag,
     generalLocation: postLocation,
     post_status: "Available",
-    postedby: userId
 }
     ).then(function (response) {
     //   console.log(response);

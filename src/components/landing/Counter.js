@@ -12,7 +12,7 @@ export default function Counter() {
     axios.get("https://soal-capstone-project.herokuapp.com/getUserCount", {
     
       }).then(function (response) {
-        console.log(response.data.UserCount);
+        //console.log(response.data.UserCount);
         setUserCount(response.data.UserCount);
       })
         .catch(function (error) {
@@ -23,7 +23,7 @@ export default function Counter() {
         axios.get("https://soal-capstone-project.herokuapp.com/getPostCount", {
         
           }).then(function (response) {
-            console.log(response.data.PostCount);
+            //console.log(response.data.PostCount);
             setPostCount(response.data.PostCount);
           })
             .catch(function (error) {
@@ -34,7 +34,7 @@ export default function Counter() {
             axios.get("https://soal-capstone-project.herokuapp.com/getCommunityCount", {
             
               }).then(function (response) {
-                console.log(response.data.CommunityCount);
+                //console.log(response.data.CommunityCount);
                 setCommunityCount(response.data.CommunityCount);
               })
                 .catch(function (error) {

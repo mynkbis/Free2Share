@@ -7,6 +7,7 @@ import Icon from "@material-tailwind/react/Icon";
 import Input from '@material-tailwind/react/Input';
 import Button from '@material-tailwind/react/Button';
 import axios from 'axios'
+import authHeader from 'authHeader';
 
 function AddMembers() {
     const [memberList, setMemberList] = useState([])
@@ -18,8 +19,8 @@ function AddMembers() {
 // need to check if the user is an admin who is allowed to add members
       let userId = ((localStorage.getItem("userId")))
        // fetching the user details from user table
-    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
-        "userID" : userId
+    useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/getUserDetails', {
+        headers : authHeader()
     })
     .then(res => {setUserDetails(res.data) 
         console.log(userDetails);})  
@@ -35,7 +36,7 @@ function AddMembers() {
 //   also need to check the the member being added is already a member of the community.
 
   
-        return 
+        return (
   
   <div>
 <div className="flex justify-left mt-10">
@@ -86,7 +87,7 @@ function AddMembers() {
 </div>
 
       
-  </div>;
-}
+  </div>
+)}
 
 export default AddMembers;

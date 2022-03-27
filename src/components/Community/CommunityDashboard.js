@@ -35,18 +35,17 @@ const InputFile = styled('input')({
 });
 
 export default function CommunityDashboard(props) {
-    console.log(props.communityId)
+    console.log("communityId : ", props.communityId)
     const communityId = props.communityId
-    console.log(communityId)
+    console.log("communityId in var : ",communityId)
     let history = useHistory()
     const [showModal, setShowModal] = useState(false);
     const [memberId, setMemberId] = useState([])
     const [memberList, setMemberList] = useState([])
     const [communityData, setCommunityData] = useState({})
-
      // fetching the community details from community table for that specific id
      useEffect(() => axios.get(`https://soal-capstone-project.herokuapp.com/showCommunityByID/${communityId}`, {
-        headers : authHeader()
+        headers : authHeader() 
     })   
     .then(res =>  setCommunityData(res.data))  
     .catch(function (error) {
@@ -68,7 +67,7 @@ export default function CommunityDashboard(props) {
                                 <div className="relative">
                                     <div className="w-40 -mt-20">
                                     <Image
-                                            src={communityData[0]?.community_image.url}
+                                            src={communityData?.community_image?.url}
                                             alt="Profile picture"
                                             raised
                                             rounded
@@ -77,15 +76,15 @@ export default function CommunityDashboard(props) {
                                 </div>
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                              {/* <AddMembers communityId = {communityId}/> */}
+                              <AddMembers communityId = {communityId}/>
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData[0]?.communityId})}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData?.communityId})}}> 
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;
                                     {/* <Button color="lightBlue" ripple="light">  */}
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList",{communityMember:communityData[0]?.communityMember} )}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/CommunityMemberList",{communityMember:communityData?.communityMember} )}}> 
                                        Member List
                                       
                                     </Button>
@@ -95,7 +94,7 @@ export default function CommunityDashboard(props) {
                                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                         <div className="mr-4 p-3 text-center">
                                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {communityData[0]?.communityMember?.length}
+                                            {communityData? (communityData?.communityMember?.length) : 0}
                                             </span>
                                             <span className="text-sm text-gray-700">
                                                 Members
@@ -122,23 +121,20 @@ export default function CommunityDashboard(props) {
                             </div>
 
                             <div className="text-center my-8">
-                                <H3 color="gray">{communityData[0]?.communityName}</H3>
+                                <H3 color="gray">{communityData?.communityName}</H3>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Community created on - {dateFormat(communityData?.createdAt, "mmm dS, yyyy")}
+                                    created by - {communityData?.createdByID?.name}, created on - {dateFormat(communityData?.createdAt, "mmm dS, yyyy")}
                                 </div>
-                                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
-                                    <Icon name="work" size="xl" />
-                                <div> Community created by - {communityData[1]?.createdByName}</div>   
-                                </div>
-                                                           </div>
+                               
+                        </div>
 
                             <div className="mb-10 py-2 border-t border-gray-200 text-center">
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
-                                        <LeadText color="blueGray">
+                                        <LeadText color="blueGray"> Community Info : 
                                             {/* Description of community -  */}
-                                             {communityData[0]?.communityDescription}
+                                             {communityData?.communityDescription}
                                           
                                         </LeadText>
                                        

@@ -11,6 +11,7 @@ import axios from "axios"
 import { useEffect, useState } from 'react';
 import Login from 'pages/Login';
 import authHeader from 'authHeader';
+import { RssFeed } from '@mui/icons-material';
 
 
 export default function Content(props) {
@@ -39,23 +40,22 @@ const [userDetails, setUserDetails]=useState({
     newEmail:"",
     newEmailStatus:"",})
 
-
+ if(userDetails.newMobile === ""){
     axios.get("https://soal-capstone-project.herokuapp.com/getUserDetails",{
         headers : authHeader()
     }).then(res=>{
-        (sessionStorage.setItem("Name-is", res.data.name))
         setUserDetails({
+            user_image: res.data.user_image.url,
             newUserName:res.data.name,
             newMobile:res.data.mobile,
             newDOB:res.data.birth_date,
             newGender:res.data.gender,
-            newLine1:res.data.location,
+            newLine1:res.data.address.line1,
             newLine2:res.data.address.line2,
-            newCity:res.data.name,
-            newState:res.data.name,
-            newCountry:res.data.name,
-            newPincode:res.data.name,
-            
+            newCity:res.data.address.city,
+            newState:res.data.address.state,
+            newCountry:res.data.address.country,
+            newPincode:res.data.address.pin_code,
             newHobbies:res.data.hobbies,
             newRoles:res.data.roles,
             newUser_status:res.data.user_status,
@@ -72,6 +72,7 @@ const [userDetails, setUserDetails]=useState({
         alert("Something went wrong try again")
 // console.log(error)  
     })
+}
 const [UserMatter,setUserMatter]=useState('');
 
 
@@ -104,7 +105,7 @@ History.push('./login')
                                 <div className="relative">
                                     <div className="w-40 -mt-20">
                                         <Image
-                                            src={userDetails?.user_image?.url}
+                                            src={userDetails ? (userDetails?.user_image) : ProfilePicture}
                                             alt="Profile picture"
                                             raised
                                             rounded
@@ -130,41 +131,18 @@ History.push('./login')
                                     Signout
                                     </Button> 
                             </div>
-                            <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                            {/* <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                 <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                                    {/* <div className="mr-4 p-3 text-center">
-                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            22
-                                        </span>
-                                        <span className="text-sm text-gray-700">
-                                            Friends
-                                        </span>
-                                    </div>
-                                    <div className="mr-4 p-3 text-center">
-                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            10
-                                        </span>
-                                        <span className="text-sm text-gray-700">
-                                            Photos
-                                        </span>
-                                    </div>
-                                    <div className="lg:mr-4 p-3 text-center">
-                                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            89
-                                        </span>
-                                        <span className="text-sm text-gray-700">
-                                            Comments
-                                        </span>
-                                    </div> */}
+                                   
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="text-center my-8">
                         <H3 color="gray">{userDetails.newUserName}</H3>
                             
                         <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
-                             <Icon name="male/female" size="xl" /> Gender: {userDetails.newGender}
+                             <Icon name="male/female" size="xl" /> Gender: {userDetails?.newGender}
                             </div>
                             <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                 <Icon name="" size="xl"/>Birthday: {userDetails.newDOB}
@@ -178,7 +156,7 @@ History.push('./login')
                                 {userDetails.newEmail}: {userDetails.newEmailStatus}
                             </div>
                             <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
-                                <Icon name="face" size="xl" /> Role: {userDetails.roles}
+                                <Icon name="face" size="xl" /> Role: ...
                             </div>
                          
                            <div className="mt-0 mb-2 text-gray-80 font-medium flex items-center justify-center gap-2">
