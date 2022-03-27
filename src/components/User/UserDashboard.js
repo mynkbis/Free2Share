@@ -90,8 +90,8 @@ function UserDashboard() {
         console.log(userDetails);   
 
         //fetching Photos from Gallery Table
-  useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showGallaryByUser', {
-    "userID" : userId
+  useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showGallaryByUser', {
+    headers : authHeader()
 })
     .then(res => {
         setUserGallery(res.data[0].gallary_images)
