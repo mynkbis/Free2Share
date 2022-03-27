@@ -22,6 +22,7 @@ export default function Register() {
     const History=useHistory();
     const[values,setValues]=useState({
         name:"",
+        email:"",
         username:"",
         mobile: "",
         password:"",
@@ -31,6 +32,7 @@ export default function Register() {
 
     const [name, setName] = useState("");
     const [username, setUserame] = useState("");
+    const [email, setEmail] = useState("");
     const [mobile, setMobile] = useState("");
     const [password, setPassword] = useState("");
 
@@ -38,6 +40,9 @@ export default function Register() {
       
       const setNameInput =(e)=>{
         setName(e.target.value);
+      }
+      const setEmailInput =(e)=>{
+        setEmail(e.target.value);
       }
       const setUsernameInput =(e)=>{
         setUserame(e.target.value);
@@ -60,9 +65,10 @@ const Submit=(e)=>{  // submit function
             
 setErrors(Validation(values));
       //  console.log(values, name, username, password)
-    if(name && mobile  && username && password && values.check){
+    if(name && mobile  && email && username && password && values.check){
     axios.post("https://soal-capstone-project.herokuapp.com/signup",{
         name: name,
+        email: email,
         username: username,
         mobile: mobile,
         password: password
@@ -79,6 +85,7 @@ setErrors(Validation(values));
 
     setValues({ 
         name:"",
+        email:"",
         username:"",
         mobile:"",
         password:"",
@@ -123,6 +130,10 @@ setErrors(Validation(values));
                                 color="lightBlue"
                                 placeholder="Username"
                                 iconName="account_circle"
+                                name="username"
+                                defaultValue={values.username}
+                                onInput={setUsernameInput}
+                               onChange={handleChange}
                                />
                               </div>
                         <div className="mb-10 px-4">
@@ -131,12 +142,12 @@ setErrors(Validation(values));
                                 color="lightBlue"
                                 placeholder="Email Address"
                                 iconName="email"
-                                name="username"
-                                defaultValue={values.username}
-                                onInput={setUsernameInput}
+                                name="email"
+                                defaultValue={values.email}
+                                onInput={setEmailInput}
                                onChange={handleChange}
                             />
-                            {errors.username && <p className='errors'>{errors.username}</p>}
+                            {errors.email && <p className='errors'>{errors.email}</p>}
                         </div>
                         <div className="mb-10 px-4">
                             <InputIcon

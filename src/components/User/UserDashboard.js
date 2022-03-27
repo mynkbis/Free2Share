@@ -26,7 +26,9 @@ import Pagination from '../../components/Pagination'
 import CreateCommunityForm from 'components/Community/CreateCommunityForm';
 import { useHistory } from 'react-router-dom'; 
 import GetDate  from 'components/GetDate';
- import UserPostSection from '../UserPostSection'
+import UserPostSection from '../UserPostSection'
+import authHeader from 'authHeader';
+import dateFormat from 'dateformat';
 
 const InputFile = styled('input')({
     display: 'none',
@@ -36,16 +38,37 @@ function UserDashboard() {
     let history = useHistory();
     // const dispatch = useDispatch();
     const [communityList, setCommunityList] = useState([])
+    const [CommunityCount, setCommunityCount] = useState("0");
+    const [PostCount, setPostCount] = useState("0");
     const [userDetails, setUserDetails] = useState({})
-    const [userGallery, setUserGallery] = useState([])
-//getting the userid from the localstorage
-let userId = ((localStorage.getItem("userId")))
-let AccessToken = ((localStorage.getItem("AccessToken")))
-console.log(userId)
+     const [userGallery, setUserGallery] = useState([])
 
-    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showCommunity', {
-        "userID": userId,
-        "AccessToken": AccessToken
+    if(CommunityCount === "0"){
+        axios.get("https://soal-capstone-project.herokuapp.com/getCommunityCountByUser", {
+            headers : authHeader()
+          }).then(function (response) {
+            console.log(response.data.CommunityCount);
+            setCommunityCount(response.data.CommunityCount);
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
+          }
+          if(PostCount === "0"){
+            axios.get("https://soal-capstone-project.herokuapp.com/getPostCountByUser", {
+                headers : authHeader()
+              }).then(function (response) {
+                console.log(response.data.PostCount);
+                setPostCount(response.data.PostCount);
+              })
+                .catch(function (error) {
+                  console.log(error);
+                });
+              }
+
+    useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showCommunity', {
+        headers : authHeader()
+
     })
         .then(res => setCommunityList(communityList => [...communityList, res]))
         .catch(function (error) {
@@ -55,8 +78,8 @@ console.log(userId)
      console.log(communityList);  
 
     // fetching the user details from user table
-    useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/getUserDetails', {
-        "userID" : userId
+    useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/getUserDetails', {
+        headers : authHeader()
     })
     .then(res => {setUserDetails(res) 
         console.log(userDetails);})  
@@ -121,7 +144,7 @@ console.log(userId)
                                     <CommunityListModal list={communityList[0]?.data} />
                                     {/* // </Button> */}
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light">
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/profile")}}>
                                         Edit Profile
                                     </Button>
                                 </div>
@@ -135,10 +158,10 @@ console.log(userId)
                                                     height: '300px',
                                                     objectFit: 'cover'
                                                 }}
-                                                // // src={ProfilePicture}
-                                                // {userDetails? src={userDetails.user_image.url}: 
+                                                
+                                                // src={ProfilePicture}
+                                             src={userDetails?.user_image?.url}
 
-                                             src={userDetails? userDetails?.data?.user_image?.url: {ProfilePicture}}
                                             />
                                         </div>
                                     </div>
@@ -147,7 +170,7 @@ console.log(userId)
 
                                     <div className="mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            {communityList[0] ? communityList[0].data.length : 0}
+                                            {CommunityCount}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Communities
@@ -174,7 +197,7 @@ console.log(userId)
 
                                     <div className="lg:mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            8
+                                            {PostCount? PostCount : 0}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Posts
@@ -188,13 +211,12 @@ console.log(userId)
                                 {/* <H3 color="gray">{communityList.data[0]}</H3> */}
                                 <div className="mt-0 mb-2 text-gray-700 font-medium flex items-center justify-center gap-2">
                                     <Icon name="place" size="xl" />
-                                    -- Location --
-                                    {userDetails?.data?.address?.city} 
-                                    {/* check this after user address is updates */}
+                                    {userDetails?.address?.city}{", "}  
+                                    {userDetails?.address?.country}
                                 </div>
                                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                                     <Icon name="work" size="xl" />
-                                    Member Since - {GetDate( userDetails?.createdAt)}
+                                    Member Since - {dateFormat(userDetails?.createdAt, "mmm dS, yyyy")}
                                 </div>
 
                             </div>

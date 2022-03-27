@@ -9,6 +9,7 @@ import axios from 'axios';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom'; 
+import authHeader from 'authHeader';
 toast.configure()
 
 const successToast = ()=>{
@@ -23,19 +24,12 @@ export default function CreateCommunityForm(props) {
     const [communityName, setCommunityName] = useState('')
     const [communityDesc, setCommunityDesc] = useState('');
 
-    //getting the userid from the localstorage
-let userId = ((localStorage.getItem("userId")))
-let AccessToken = ((localStorage.getItem("AccessToken")))
-console.log(userId)
-
     function submitForm() {
     console.log("inside submitForm");
     //  console.log(document.getElementById("inputName").value);
     console.log(communityName, " ", communityDesc)
-    axios.post("https://soal-capstone-project.herokuapp.com/createCommunity", {
-        communityName: communityName,
-        communityDescription: communityDesc,
-      createdByID: userId
+    axios.get(`https://soal-capstone-project.herokuapp.com/createCommunity/${communityName}/${communityDesc}`, {
+        headers : authHeader()
     }).then(function (response) {
       console.log(response);
       if(response.data.message === "Failed! This Community already exists."){history.push("/CommunityExistsModal")}

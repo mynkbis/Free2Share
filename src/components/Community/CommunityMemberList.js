@@ -28,7 +28,7 @@ console.log(props.location.state.communityMember)
             actions={[<a key="list-loadmore-edit">Remove</a>, <a key="list-loadmore-more">Edit</a>, <a key="list-loadmore-more">Chat</a>]}
           >
             <List.Item.Meta
-              title={item.memberid}
+              title={item.membername}
             />
           </List.Item>
         )}
