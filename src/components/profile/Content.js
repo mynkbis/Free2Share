@@ -50,11 +50,11 @@ const [userDetails, setUserDetails]=useState({
             newDOB:res.data.birth_date,
             newGender:res.data.gender,
             newLine1:res.data.location,
-            // newLine2:res.data.name,
-            // newCity:res.data.name,
-            // newState:res.data.name,
-            // newCountry:res.data.name,
-            // newPincode:res.data.name,
+            newLine2:res.data.address.line2,
+            newCity:res.data.name,
+            newState:res.data.name,
+            newCountry:res.data.name,
+            newPincode:res.data.name,
             
             newHobbies:res.data.hobbies,
             newRoles:res.data.roles,
@@ -104,7 +104,7 @@ History.push('./login')
                                 <div className="relative">
                                     <div className="w-40 -mt-20">
                                         <Image
-                                            src={ProfilePicture}
+                                            src={userDetails?.user_image?.url}
                                             alt="Profile picture"
                                             raised
                                             rounded
