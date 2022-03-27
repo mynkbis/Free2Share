@@ -41,6 +41,8 @@ function UserDashboard() {
     const [CommunityCount, setCommunityCount] = useState("0");
     const [PostCount, setPostCount] = useState("0");
     const [userDetails, setUserDetails] = useState({})
+     const [userGallery, setUserGallery] = useState([])
+
     if(CommunityCount === "0"){
         axios.get("https://soal-capstone-project.herokuapp.com/getCommunityCountByUser", {
             headers : authHeader()
@@ -66,6 +68,7 @@ function UserDashboard() {
 
     useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/showCommunity', {
         headers : authHeader()
+
     })
         .then(res => setCommunityList(communityList => [...communityList, res]))
         .catch(function (error) {
@@ -74,12 +77,11 @@ function UserDashboard() {
         , [])
      console.log(communityList);  
 
-
     // fetching the user details from user table
     useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/getUserDetails', {
         headers : authHeader()
     })
-    .then(res => {setUserDetails(res.data) 
+    .then(res => {setUserDetails(res) 
         console.log(userDetails);})  
     .catch(function (error) {
         console.log(error.toJSON());
@@ -87,6 +89,19 @@ function UserDashboard() {
     ,[]) 
         console.log(userDetails);   
 
+        //fetching Photos from Gallery Table
+  useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showGallaryByUser', {
+    "userID" : userId
+})
+    .then(res => {
+        setUserGallery(res.data[0].gallary_images)
+  
+    })
+    .catch(function (error) {
+        console.log(error.toJSON());
+    })
+    , [])
+    console.log(userGallery);
 
     // //fetching Posts from Post Table
     // useEffect(() => axios.post('https://soal-capstone-project.herokuapp.com/showPostByUser', {
@@ -143,10 +158,10 @@ function UserDashboard() {
                                                     height: '300px',
                                                     objectFit: 'cover'
                                                 }}
+                                                
                                                 // src={ProfilePicture}
                                              src={userDetails?.user_image?.url}
 
-                                            //  src={userDetails? userDetails.data[0].user_image.url: {ProfilePicture}}
                                             />
                                         </div>
                                     </div>
@@ -164,7 +179,7 @@ function UserDashboard() {
 
                                     <div className="mr-4 p-3 text-center">
                                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-900">
-                                            10
+                                            {userGallery?.length}
                                         </span>
                                         <span className="text-sm text-gray-700">
                                             Photos
@@ -222,7 +237,7 @@ function UserDashboard() {
                             {/* PhotoGallery Code starts here */}
                             <div className="text-center my-8">
                                 <H5 color="gray">Uploaded by User</H5>
-                                <PhotoGallery />
+                                <PhotoGallery userGalleryimages = {userGallery}/>
 
                             </div>
 
