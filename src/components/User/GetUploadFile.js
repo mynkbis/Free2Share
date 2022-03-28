@@ -6,7 +6,7 @@ import axios from 'axios'
 
 //need to pass the thumburl with the post request
 // console.log(defaultFileList)
-function GetUploadFile() {
+function GetUploadFile(properties) {
     const [imageUrl, setImageUrl]= useState({})
     const fileList = []
  
@@ -27,11 +27,20 @@ const props = {
   }
 };
    
-function uploadImage(){axios.post('https://soal-capstone-project.herokuapp.com/uploadPostImage', {
-    "product_image" : imageUrl,
-    "postId":"6202cf3b8bee879a0ed109c7"
-})   
-.then(res =>  console.log(res))  
+function uploadImage(){
+  axios.post('https://soal-capstone-project.herokuapp.com/createGallary',{
+    "communityID": properties.communityId,
+    "postedby": properties.userId
+  })
+  .then(res => {console.log(imageUrl)
+  axios.post('https://soal-capstone-project.herokuapp.com/uploadGallaryImage', {
+    "gallary_images" : imageUrl,
+    "gallaryID":res.data.gallaryID,
+    "communityID": properties.communityId,
+    "postedby": properties.userId
+}).then(res=> console.log(res))}
+)   
+// .then(res =>  console.log(res))  
 .catch(function (error) {
     console.log(error.toJSON());
   })} 

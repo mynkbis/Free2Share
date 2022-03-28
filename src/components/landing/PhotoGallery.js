@@ -6,7 +6,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import PostPage from 'components/Community/PostPage';
 
 export default function PhotoGallery(props) {
-  console.log(props.userGalleryimages)
+  console.log(props)
   return (
     <Box sx={{  overflowY: 'scroll' }}>
       <ImageList variant="masonry" cols={4} gap={1}>

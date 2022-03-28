@@ -29,6 +29,7 @@ import CommunityDashboardPage from '../../pages/CommunityDashboardPage'
 import UserListModal from 'components/User/UserListModal';
 import authHeader from 'authHeader';
 import dateFormat from 'dateformat';
+import GetUploadFile from 'components/User/GetUploadFile'
 
 const InputFile = styled('input')({
     display: 'none',
@@ -152,9 +153,9 @@ export default function CommunityDashboard(props) {
                                     <H5 color="gray">Community Photo Gallery</H5>
 
                                     {/* For Upload picture option */}
+                                    <GetUploadFile communityId = {communityId} userId = {userId} />
 
-
-                                    <label htmlFor="icon-button-file">
+                                    {/* <label htmlFor="icon-button-file">
                                         <InputFile accept="image/*" id="icon-button-file" type="file" />
                                         <IconButton color="primary" aria-label="upload picture" component="span">
                                             <PhotoCamera />
@@ -162,7 +163,7 @@ export default function CommunityDashboard(props) {
                                     </label>
 
 
-                                    <PhotoGallery />
+                                    <PhotoGallery /> */}
 
                                     {/* Testimonial with Carousel */}
 
