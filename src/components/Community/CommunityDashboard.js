@@ -77,10 +77,10 @@ export default function CommunityDashboard(props) {
                                 </div>
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:self-center flex justify-center mt-10 lg:justify-end lg:mt-0">
-                              <AddMembers communityId = {communityId}/>
+                              <AddMembers userId = {communityData?.createdByID} userName = {communityData?.createdByID?.name} communityName = {communityData?.communityName} communityId = {communityData?._id}/>
                          
                                     &nbsp;&nbsp;&nbsp;
-                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData?.communityId})}}> 
+                                    <Button color="lightBlue" ripple="light" onClick ={() => {history.push("/createNewPost", {communityId:communityData?._id})}}> 
                                         Add Post
                                     </Button>
                                     &nbsp;&nbsp;&nbsp;

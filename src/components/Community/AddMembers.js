@@ -9,7 +9,8 @@ import Button from '@material-tailwind/react/Button';
 import axios from 'axios'
 import authHeader from 'authHeader';
 
-function AddMembers() {
+function AddMembers(properties) {
+    console.log(properties)
     const [memberList, setMemberList] = useState([])
     const [showModal, setShowModal] = useState(false)
       const [memberId, setMemberId] = useState([])
@@ -18,18 +19,33 @@ function AddMembers() {
       console.log({memberId})
 // need to check if the user is an admin who is allowed to add members
       let userId = ((localStorage.getItem("userId")))
-       // fetching the user details from user table
-    useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/getUserDetails', {
-        headers : authHeader()
+    //    // fetching the user details from user table
+    // useEffect(() => axios.get('https://soal-capstone-project.herokuapp.com/getUserDetails', {
+    //     headers : authHeader()
+    // })
+    // .then(res => {setUserDetails(res.data) 
+    //     console.log(userDetails);})  
+    // .catch(function (error) {
+    //     console.log(error.toJSON());
+    //   })
+    // ,[]) 
+    //     console.log(userDetails);   
+function submitMemberId(){
+    axios.post('https://soal-capstone-project.herokuapp.com/inviteLink', {
+        name: properties.userName,
+        userID: properties.userId._id,
+        communityName: properties.communityName,
+        communityID: properties.communityId,
+        email: memberId
     })
-    .then(res => {setUserDetails(res.data) 
-        console.log(userDetails);})  
+    .then(res => {
+        console.log(res);})  
     .catch(function (error) {
         console.log(error.toJSON());
       })
-    ,[]) 
-        console.log(userDetails);   
-
+}
+        
+       
   //API call to add user to community is still pending. 
 //   also need to check if the user is already on th website. 
 //   also need to check if the person trying to add is an admin. 
@@ -77,7 +93,10 @@ function AddMembers() {
 
         <Button
             color="green"
-            onClick={(e) => {setShowModal(false); setMemberList(oldArray => [...oldArray, memberId])}}
+            onClick={(e) => {setShowModal(false); 
+                submitMemberId();
+                setMemberList(oldArray => [...oldArray, memberId])
+            }}
             ripple="light"
         >
             Save Changes

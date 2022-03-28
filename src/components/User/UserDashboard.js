@@ -97,6 +97,7 @@ function UserDashboard() {
 })
     .then(res => {
         setUserGallery(res.data[0].gallary_images)
+      
   
     })
     .catch(function (error) {

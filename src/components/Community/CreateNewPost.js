@@ -20,6 +20,8 @@ import DefaultNavbar from '../DefaultNavbar'
 import {useForm } from 'react-hook-form'
 import GetUploadFile from '../User/GetUploadFile'
 import authHeader from 'authHeader';
+import { Upload} from 'antd';
+import Icon from '@ant-design/icons'
 
 toast.configure()
 
@@ -47,7 +49,31 @@ export default function CreateNewPost(props) {
     const [postDetails, setPostDetails] = useState('')
     const [submissionSuccessful, setSubmissionSuccessful]=useState(false)
    
+    const [imageUrl, setImageUrl]= useState({})
+    const fileList = []
+ 
+    console.log(props.location.state.communityId)
+const properties = {
+  action: '',
+  listType: 'picture',
+  defaultFileList: [...fileList],
+  onChange(info) {
+    let fileList = [...info.fileList];
+    const file = fileList[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file.originFileObj);
+// console.log(file.name)
+    reader.onload = (e) => {
+      const base64Image = e.target.result;
+      setImageUrl(base64Image);
+    };
+  }
+};
+
+
     function submitForm() {
+
+        
     console.log("submiting new post", props.communityId);
   axios.post("https://soal-capstone-project.herokuapp.com/createPost",
   {
@@ -60,6 +86,7 @@ export default function CreateNewPost(props) {
     isPublic: isPublicFlag,
     generalLocation: postLocation,
     post_status: "Available",
+    product_images:imageUrl
 }
     ).then(function (response) {
     //   console.log(response);
@@ -73,9 +100,7 @@ export default function CreateNewPost(props) {
       });
     }
 
-    function uploadImage(){
-
-    }
+    
 
    console.log("postTitle", postTitle,"itemName", itemName, "postDetails", postDetails,"postType", postType , "isPublicFlag", isPublicFlag, "postLocation", postLocation)
   const handlePostTypeRadioButtons = e => {
@@ -198,9 +223,9 @@ export default function CreateNewPost(props) {
                             onChange={event => setPostDetails(event.target.value)} 
                             />
 </div>
-{/* Item Images */}    
+{/* Item Images     */}
 {/* Code for adding images */}
-<div className="flex-right gap-8 mt-16 mb-12">
+{                   /* <div className="flex-right gap-8 mt-16 mb-12">
 <H6 color="lightBlue">Add Image</H6>
 <input
   type="file"
@@ -208,16 +233,25 @@ export default function CreateNewPost(props) {
   multiple
   id="input-files"
   class="form-control-file border"
-/>
+/> */}
 
-<GetUploadFile />
+
 {/* <label htmlFor="icon-button-file">
 <InputFile accept="image/*" id="icon-button-file" type="file" onClick={uploadImage}/>
                                         <IconButton color="primary" aria-label="upload picture (max 3)" component="span">
                                             <PhotoCamera />
                                         </IconButton>
                                     </label> */}
-</div>
+{/* </div> */}
+
+<Upload {...properties}>
+        <Button>
+          <Icon type="upload" /> Upload
+        </Button>
+      </Upload>
+      <Button className="buttonCSS" type="primary" >ADD IMAGE</Button>
+
+
                             <div className="flex justify-center mt-10">
                                 <Button color="lightBlue" ripple="light" type = "submit" onClick={handleSubmit(submitForm)}>
                                     Add Post

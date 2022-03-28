@@ -21,10 +21,9 @@ export default function PostPage(props) {
         setPostId(props.postId)
     setPostedBy(props.postedby)
     setInterestBy(userId)
-        axios.post('https://soal-capstone-project.herokuapp.com/Community', {
-           "postId": postId,
-            "postedBy":postedBy,
-            "interestBy":userId
+        axios.post('https://soal-capstone-project.herokuapp.com/showInterest', {
+           "postID": postId,
+            "userID":userId
         })
             .then(res => console.log("user will be notified"))
             .catch(function (error) {
